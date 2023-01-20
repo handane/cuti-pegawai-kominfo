@@ -5,7 +5,10 @@ if (isset($_GET['id_pendidik'])) {
    $delete = mysqli_query($conn, "DELETE FROM tenaga_pendidik WHERE id_tenaga_pendidik = '" . $_GET['id_pendidik'] . "'");
    if ($delete) {
       $_SESSION['user'] = 'Dihapus';
-      echo '<script>window.location="tenaga-pendidik.php"</script>';
+      echo '<script>
+         alert("data berhasil dihapus");
+         window.location="tenaga-pendidik.php";
+      </script>';
    } else {
       $_SESSION['user'] = 'Gagal Dihapus';
       echo '<script>window.location="tenaga-pendidik.php"</script>';

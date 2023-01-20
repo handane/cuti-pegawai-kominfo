@@ -19,8 +19,9 @@ if (!isset($_SESSION["user"])) {
    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
    <link href="css/styles.css" rel="stylesheet" />
    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+   <script>
 
-
+   </script>
    <style>
       .bx-shadow {
          box-sizing: border-box;
@@ -195,30 +196,13 @@ if (!isset($_SESSION["user"])) {
                                        <a href="edit-pendidik.php?id_pendidik=<?php echo $row['id_tenaga_pendidik'] ?>" class="btn btn-sm btn-success">
                                           <img src="icons/pencil-square.svg" style="margin-bottom: 3px;">
                                        </a>
-                                       <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deletePendidikModal">
-                                          <img src="icons/trash-fill.svg" alt="" style="margin-bottom:3px;">
-                                       </button>
+                                       <a href="proses-hapus.php?id_pendidik=<?php echo $row['id_tenaga_pendidik'] ?>" onclick="return confirm('Yakin ingin menghapus data ini?')" class="btn btn-sm btn-danger"><img src="icons/trash-fill.svg" alt="Hapus" style="margin-bottom: 3px;"></a>
 
                                     </td>
                                  </tr>
-                                 <div class="modal fade" id="deletePendidikModal" tabindex="-1" role="dialog" aria-labelledby="deletePendidikModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog dialog-sm">
-                                       <div class="modal-content">
-                                          <div class="modal-header">
-                                             <h5>Hapus Data Pendidik</h5>
-                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                                             </button>
-                                          </div>
-                                          <div class="modal-body">
-                                             <p>Yakin ingin menghapus data ini?</p>
-                                          </div>
-                                          <div class="modal-footer">
-                                             <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                             <a href="proses-hapus.php?id_pendidik=<?php echo $row['id_tenaga_pendidik'] ?>" class="btn btn-sm btn-danger">Hapus</a>
-                                          </div>
-                                       </div>
-                                    </div>
-                                 </div>
+
+                                 </td>
+                                 </tr>
                               <?php
                               }
                            } else { ?>
@@ -256,12 +240,31 @@ if (!isset($_SESSION["user"])) {
    </div>
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
    <script src="js/scripts.js"></script>
+   <!-- <script src="js/hapus.js"></script> -->
    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
    <script src="assets/demo/chart-area-demo.js"></script>
    <script src="assets/demo/chart-bar-demo.js"></script>
    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
    <script src="js/datatables-simple-demo.js"></script>
    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+
+   <!-- <script>
+      $(document).ready(function() {
+
+         $('#modal_delete').on('show.bs.modal', function(event) {
+            var div = $(event.relatedTarget); // Tombol dimana modal di tampilkan
+
+            // Untuk mengambil nilai dari data-id="" yang telah kita tempatkan pada link hapus
+            var id = div.data('id');
+
+            var modal = $(this);
+
+            // Mengisi atribut href pada tombol ya yang kita berikan id hapus-true pada modal .
+            modal.find('#hapus-true-data').attr("href", "proses-hapus.php?id_pendidik=" + id);
+         })
+
+      });
+   </script> -->
 
 </body>
 

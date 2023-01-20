@@ -103,105 +103,130 @@ if (!isset($_SESSION["admin"])) {
                      <h6>Selamat Datang, <?php echo $_SESSION['admin']['nama_admin']; ?></h6>
                   </div>
                </div>
-               <div class="card mb-4">
-                  <div class="col-md-6 card-body">
-                     <?php
-                     $x = mysqli_query($conn, "SELECT * FROM admin");
-                     if (mysqli_num_rows($x) > 0) {
-                        while ($kode = mysqli_fetch_array($x)) {
-                     ?>
-                           <ol class="breadcrumb mb-0 px-3">
-                              <li class="breadcrumb-item active">
-                                 <b>Username Admin:</b> <input readonly type="text" class="kode" name="username" value="<?php echo $kode['username'] ?>">
-                                 <button type="button" class="btn btn-sm btn-success" style="margin-bottom: 5px;" data-bs-toggle="modal" data-bs-target="#username" data-bs-whatever="@mdo"><img src="../icons/pencil-square.svg" style="margin-bottom: 4px;"></button>
-
-                                 <div class="modal fade" id="username" tabindex="-1" aria-labelledby="usernameLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                       <div class="modal-content">
-                                          <div class="modal-header">
-                                             <h5 class="modal-title" id="usernameLabel">Masukkan Username Baru</h5>
-                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                          </div>
-                                          <form method="POST">
-                                             <div class="modal-body">
-                                                <div class="mb-3">
-                                                   <label for="recipient-name" class="col-form-label">maksimal 20 angka atau huruf <i>(contoh: admin123)</i>:</label>
-                                                   <input type="text" class="form-control" id="recipient-name" name="username">
-                                                </div>
-                                             </div>
-                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
-                                                <input type="submit" class="btn btn-primary" name="save" value="Simpan">
-                                             </div>
-                                          </form>
-                                          <?php
-                                          // include_once("db.php");
-                                          if (isset($_POST["save"])) {
-                                             $username = $_POST['username'];
-
-                                             $update = mysqli_query($conn, "UPDATE admin SET
-                          username = '$username'");
-                                             if ($update) {
-                                                echo '<script>window.location="index.php"</script>';
-                                             } else {
-                                                echo 'gagal ' . mysqli_error($conn);
-                                             }
-                                          }
-                                          ?>
+               <!--  -->
+               <div class="">
+                  <section id="minimal-statistics">
+                     <div class="row">
+                        <div class="col-12 mt-3 mb-1">
+                           </div>
+                        </div>
+                        <?php 
+                        // PNS
+                           $ambil_pns = mysqli_query($conn, "SELECT * FROM tenaga_pendidik WHERE status = 'pns'");
+                           $pns = mysqli_num_rows($ambil_pns);
+                        // HONORER
+                           $ambil_honorer = mysqli_query($conn, "SELECT * FROM tenaga_pendidik WHERE status = 'Honorer'");
+                           $honorer = mysqli_num_rows($ambil_honorer);
+                           
+                        // PPPK
+                           $ambil_pppk = mysqli_query($conn, "SELECT * FROM tenaga_pendidik WHERE status = 'pppk'");
+                           $pppk = mysqli_num_rows($ambil_pppk);
+                        // tenaga kontrak
+                           $ambil_tenaga_kontrak = mysqli_query($conn, "SELECT * FROM tenaga_pendidik WHERE status = 'tenaga kontrak'");
+                           $tenaga_kontrak = mysqli_num_rows($ambil_tenaga_kontrak);
+                        // Total
+                           $ambil_total_pendidik = mysqli_query($conn, "SELECT * FROM tenaga_pendidik");
+                           $total_pendidik = mysqli_num_rows($ambil_total_pendidik);
+                        ?>
+                        <div class="row bg-light pt-3 pb-5">
+                        <h6 class="mt-2 mb-3">Tenaga Pendidik</h6>
+                        <div class="col-xl-2 col-sm-6 col-12">
+                           <div class="card">
+                              <div class="card-content">
+                                 <div class="card-body">
+                                    <div class="media d-flex">
+                                       <div class="media-body text-left">
+                                          <h3 class="primary"><?php echo $pns; ?></h3>
+                                          <span>PNS</span>
+                                       </div>
+                                       <div class="align-self-center">
+                                          <i class="icon-book-open primary font-large-2 float-right"></i>
                                        </div>
                                     </div>
-                                 </div>
-
-                              </li>
-                              <li class="">
-                                 <b>Password Admin :</b> <input readonly type="text" class="kode" name="password" value="<?php echo $kode['password'] ?>" />
-                                 <button type="button" class="btn btn-sm btn-success" style="margin-bottom: 5px;" data-bs-toggle="modal" data-bs-target="#password" data-bs-whatever="@mdo"><img src="../icons/pencil-square.svg" style="margin-bottom: 4px;"></button>
-
-                                 <div class="modal fade" id="password" tabindex="-1" aria-labelledby="passwordLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                       <div class="modal-content">
-                                          <div class="modal-header">
-                                             <h5 class="modal-title" id="passwordLabel">Masukkan Password Baru</h5>
-                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                          </div>
-                                          <form method="POST">
-                                             <div class="modal-body">
-                                                <div class="mb-3">
-                                                   <label for="recipient-name" class="col-form-label">maksimal 20 angka atau huruf <i>(contoh: admin123)</i>:</label>
-                                                   <input type="text" class="form-control" id="recipient-name" name="password">
-                                                </div>
-                                             </div>
-                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
-                                                <input type="submit" class="btn btn-primary" name="simpan" value="Simpan">
-                                             </div>
-                                          </form>
-                                          <?php
-                                          // include_once("db.php");
-                                          if (isset($_POST["simpan"])) {
-                                             $password = $_POST['password'];
-
-                                             $updatepw = mysqli_query($conn, "UPDATE admin SET
-                          password = '$password'");
-                                             if ($updatepw) {
-                                                echo '<script>window.location="index.php"</script>';
-                                             } else {
-                                                echo 'gagal ' . mysqli_error($conn);
-                                             }
-                                          }
-                                          ?>
-                                       </div>
+                                    <div class="progress mt-1 mb-0" style="height: 7px;">
+                                       <div class="progress-bar bg-primary" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                  </div>
-                              </li>
-                           </ol>
-                     <?php
-                        }
-                     }
-                     ?>
-                  </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-xl-2 col-sm-6 col-12">
+                           <div class="card">
+                              <div class="card-content">
+                                 <div class="card-body">
+                                    <div class="media d-flex">
+                                       <div class="media-body text-left">
+                                          <h3 class="warning"><?php echo $honorer ?></h3>
+                                          <span>Honorer</span>
+                                       </div>
+                                       <div class="align-self-center">
+                                          <i class="icon-bubbles warning font-large-2 float-right"></i>
+                                       </div>
+                                    </div>
+                                    <div class="progress mt-1 mb-0" style="height: 7px;">
+                                       <div class="progress-bar bg-warning" role="progressbar" style="width: 100%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-xl-2 col-sm-6 col-12">
+                           <div class="card">
+                              <div class="card-content">
+                                 <div class="card-body">
+                                    <div class="media d-flex">
+                                       <div class="media-body text-left">
+                                          <h3 class="success"><?php echo $pppk; ?></h3>
+                                          <span>PPPK</span>
+                                       </div>
+                                    </div>
+                                    <div class="progress mt-1 mb-0" style="height: 7px;">
+                                       <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-xl-2 col-sm-6 col-12">
+                           <div class="card">
+                              <div class="card-content">
+                                 <div class="card-body">
+                                    <div class="media d-flex">
+                                       <div class="media-body text-left">
+                                          <h3 class="danger"><?php echo $tenaga_kontrak; ?></h3>
+                                          <span>Tenaga Kontrak</span>
+                                       </div>
+                                       <div class="align-self-center">
+                                          <i class="icon-direction danger font-large-2 float-right"></i>
+                                       </div>
+                                    </div>
+                                    <div class="progress mt-1 mb-0" style="height: 7px;">
+                                       <div class="progress-bar bg-info" role="progressbar" style="width: 100%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-xl-4 col-sm-6 col-12">
+                           <div class="card">
+                              <div class="card-content">
+                                 <div class="card-body">
+                                    <div class="media d-flex">
+                                       <div class="media-body text-left">
+                                          <h3 class="danger"><?php echo $total_pendidik; ?></h3>
+                                          <h6>Total Pendidik</h6>
+                                       </div>
+                                    </div>
+                                    <div class="progress mt-1 mb-0" style="height: 7px;">
+                                       <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </section>
                </div>
-            </div>
          </main>
          <footer class="py-4 bg-light mt-auto">
             <div class="container-fluid px-4">

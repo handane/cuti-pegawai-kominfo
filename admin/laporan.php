@@ -10,11 +10,9 @@ if (!isset($_SESSION["admin"])) {
 <html lang="en">
 
 <head>
-   <meta charset="utf-8" />
-   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-   <meta name="description" content="" />
-   <meta name="author" content="" />
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>SIDINI</title>
    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
    <link href="../css/styles.css" rel="stylesheet" />
@@ -89,6 +87,12 @@ if (!isset($_SESSION["admin"])) {
                         <i class="fas fa-book-open"></i>
                      </div>
                      Laporan
+                  </a>
+                  <a class="nav-link" href="tenaga-pendidik.php">
+                     <div class="sb-nav-link-icon">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                     </div>
+                     Tenaga Pendidik
                   </a>
                </div>
             </div>
@@ -167,7 +171,7 @@ if (!isset($_SESSION["admin"])) {
                                  <tr style="font-size: 16px;" id="klik-tabel">
                                     <td><?php echo $no++ ?></td>
                                     <td>
-                                       <a href="laporan-paud.php?id=<?php echo $p['id_laporan'];?>&identitas=<?php echo $p['id_author']; ?>" style="text-decoration:none; color:darkblue;">
+                                       <a href="laporan-paud.php?id=<?php echo $p['id_laporan']; ?>&identitas=<?php echo $p['id_author']; ?>" style="text-decoration:none; color:darkblue;">
                                           <div class="klik-tabel"><?php echo $p['nama_paud']; ?></div>
                                        </a>
                                     </td>
@@ -180,7 +184,6 @@ if (!isset($_SESSION["admin"])) {
                         </tbody>
                      </table>
                   </div>
-
                </div>
             </div>
          </main>
@@ -206,8 +209,10 @@ if (!isset($_SESSION["admin"])) {
    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
    <script src="../assets/demo/chart-area-demo.js"></script>
    <script src="../assets/demo/chart-bar-demo.js"></script>
-   <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
    <script src="../js/datatables-simple-demo.js"></script>
+   <!-- <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script> -->
+   <script src="../datatables/datatable.js"></script>
+
 </body>
 
 </html>
