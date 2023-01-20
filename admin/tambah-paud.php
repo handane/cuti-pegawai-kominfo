@@ -85,6 +85,12 @@ if (!isset($_SESSION["admin"])) {
                      </div>
                      Laporan
                   </a>
+                  <a class="nav-link" href="tenaga-pendidik.php">
+                     <div class="sb-nav-link-icon">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                     </div>
+                     Tenaga Pendidik
+                  </a>
                </div>
             </div>
             <div class="sb-sidenav-footer">

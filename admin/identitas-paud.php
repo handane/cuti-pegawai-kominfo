@@ -98,6 +98,12 @@ if (!isset($_SESSION["admin"])) {
                      </div>
                      Laporan
                   </a>
+                  <a class="nav-link" href="tenaga-pendidik.php">
+                     <div class="sb-nav-link-icon">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                     </div>
+                     Tenaga Pendidik
+                  </a>
                </div>
             </div>
             <div class="sb-sidenav-footer">
@@ -203,6 +209,108 @@ if (!isset($_SESSION["admin"])) {
                               }
                            }
                            ?>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-md-6 mt-3">
+                           <div class="card">
+                              <div class="card-content">
+                                 <div class="card-body">
+                                    <div class="media d-flex">
+                                       <div class="media-body text-left">
+                                          <?php
+                                          // PAUD
+                                          $ambil_paud = mysqli_query($conn, "SELECT * FROM user WHERE nama_paud LIKE 'paud%'");
+                                          $paud = mysqli_num_rows($ambil_paud);
+                                          ?>
+                                          <h3 class="primary"><?php echo $paud; ?></h3>
+                                          <h6>PAUD</h6>
+                                       </div>
+                                       <div class="align-self-center">
+                                          <i class="icon-book-open primary font-large-2 float-right"></i>
+                                       </div>
+                                    </div>
+                                    <div class="progress mt-1 mb-0" style="height: 7px;">
+                                       <div class="progress-bar bg-primary" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-md-6 mt-3">
+                           <div class="card">
+                              <div class="card-content">
+                                 <div class="card-body">
+                                    <div class="media d-flex">
+                                       <div class="media-body text-left">
+                                          <?php
+                                          // PAUD
+                                          $ambil_KB = mysqli_query($conn, "SELECT * FROM user WHERE nama_paud LIKE 'KB%'");
+                                          $KB = mysqli_num_rows($ambil_KB);
+                                          ?>
+                                          <h3 class="primary"><?php echo $KB; ?></h3>
+                                          <h6>Kelompok Bermain</h6>
+                                       </div>
+                                       <div class="align-self-center">
+                                          <i class="icon-book-open primary font-large-2 float-right"></i>
+                                       </div>
+                                    </div>
+                                    <div class="progress mt-1 mb-0" style="height: 7px;">
+                                       <div class="progress-bar bg-warning" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-md-6 mt-3">
+                           <div class="card">
+                              <div class="card-content">
+                                 <div class="card-body">
+                                    <div class="media d-flex">
+                                       <div class="media-body text-left">
+                                          <?php
+                                          // PAUD
+                                          $ambil_tk = mysqli_query($conn, "SELECT * FROM user WHERE nama_paud LIKE 'tk%'");
+                                          $tk = mysqli_num_rows($ambil_tk);
+                                          ?>
+                                          <h3 class="primary"><?php echo $tk; ?></h3>
+                                          <h6>TK</h6>
+                                       </div>
+                                       <div class="align-self-center">
+                                          <i class="icon-book-open primary font-large-2 float-right"></i>
+                                       </div>
+                                    </div>
+                                    <div class="progress mt-1 mb-0" style="height: 7px;">
+                                       <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-md-6 mt-3">
+                           <div class="card">
+                              <div class="card-content">
+                                 <div class="card-body">
+                                    <div class="media d-flex">
+                                       <div class="media-body text-left">
+                                          <?php
+                                          // PAUD
+                                          $ambil_total = mysqli_query($conn, "SELECT * FROM user");
+                                          $total = mysqli_num_rows($ambil_total);
+                                          ?>
+                                          <h3 class="primary"><?php echo $total; ?></h3>
+                                          <h6>Total</h6>
+                                       </div>
+                                       <div class="align-self-center">
+                                          <i class="icon-book-open primary font-large-2 float-right"></i>
+                                       </div>
+                                    </div>
+                                    <div class="progress mt-1 mb-0" style="height: 7px;">
+                                       <div class="progress-bar bg-secondary" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
                         </div>
                      </div>
                   </div>

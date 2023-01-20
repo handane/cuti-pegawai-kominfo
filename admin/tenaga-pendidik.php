@@ -107,168 +107,274 @@ if (!isset($_SESSION["admin"])) {
     <div id="layoutSidenav_content" class="bgc">
       <main>
         <div class="container-fluid px-3">
-          <h5 class="mt-4">Tenaga Pendidik</h4>
-          <div class="">
-            <section id="minimal-statistics">
-              <?php
-              // PNS
-              $ambil_pns = mysqli_query($conn, "SELECT * FROM tenaga_pendidik WHERE status = 'pns'");
-              $pns = mysqli_num_rows($ambil_pns);
-              // HONORER
-              $ambil_honorer = mysqli_query($conn, "SELECT * FROM tenaga_pendidik WHERE status = 'Honorer'");
-              $honorer = mysqli_num_rows($ambil_honorer);
+          <h5 class="mt-3">Tenaga Pendidik</h4>
+            <div class="">
+              <section id="minimal-statistics">
+                <?php
+                // PNS
+                $ambil_pns = mysqli_query($conn, "SELECT * FROM tenaga_pendidik WHERE status = 'pns'");
+                $pns = mysqli_num_rows($ambil_pns);
+                // HONORER
+                $ambil_honorer = mysqli_query($conn, "SELECT * FROM tenaga_pendidik WHERE status = 'Honorer'");
+                $honorer = mysqli_num_rows($ambil_honorer);
 
-              // PPPK
-              $ambil_pppk = mysqli_query($conn, "SELECT * FROM tenaga_pendidik WHERE status = 'pppk'");
-              $pppk = mysqli_num_rows($ambil_pppk);
-              // tenaga kontrak
-              $ambil_tenaga_kontrak = mysqli_query($conn, "SELECT * FROM tenaga_pendidik WHERE status = 'tenaga kontrak'");
-              $tenaga_kontrak = mysqli_num_rows($ambil_tenaga_kontrak);
-              // Total
-              $ambil_total_pendidik = mysqli_query($conn, "SELECT * FROM tenaga_pendidik");
-              $total_pendidik = mysqli_num_rows($ambil_total_pendidik);
-              ?>
-              <div class="row bg-light pt-3 pb-3">
-                <div class="col-xl-2 col-sm-6 col-12">
-                  <div class="card">
-                    <div class="card-content">
+                // PPPK
+                $ambil_pppk = mysqli_query($conn, "SELECT * FROM tenaga_pendidik WHERE status = 'pppk'");
+                $pppk = mysqli_num_rows($ambil_pppk);
+                // tenaga kontrak
+                $ambil_tenaga_kontrak = mysqli_query($conn, "SELECT * FROM tenaga_pendidik WHERE status = 'tenaga kontrak'");
+                $tenaga_kontrak = mysqli_num_rows($ambil_tenaga_kontrak);
+                // Total
+                $ambil_total_pendidik = mysqli_query($conn, "SELECT * FROM tenaga_pendidik");
+                $total_pendidik = mysqli_num_rows($ambil_total_pendidik);
+                ?>
+                <div class="row bg-light pt-2 pb-1">
+                  <div class="col-md-2">
+                    <div class="card bg-primary text-white mb-1">
                       <div class="card-body">
-                        <div class="media d-flex">
-                          <div class="media-body text-left">
-                            <h3 class="primary"><?php echo $pns; ?></h3>
-                            <span>PNS</span>
-                          </div>
-                          <div class="align-self-center">
-                            <i class="icon-book-open primary font-large-2 float-right"></i>
-                          </div>
-                        </div>
-                        <div class="progress mt-1 mb-0" style="height: 7px;">
-                          <div class="progress-bar bg-primary" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
+                        <h4><?php echo $pns; ?></h4>
+                      </div>
+                      <div class="card-footer d-flex align-items-center justify-content-between">
+                        <h6>PNS</h6>
+                        <div class="small text-white"><i class="fas fa-chalkboard-teacher"></i></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <div class="card bg-warning text-white mb-1">
+                      <div class="card-body">
+                        <h4><?php echo $honorer; ?></h4>
+                      </div>
+                      <div class="card-footer d-flex align-items-center justify-content-between">
+                        <h6>Honorer</h6>
+                        <div class="small text-white"><i class="fas fa-chalkboard-teacher"></i></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <div class="card bg-success text-white mb-1">
+                      <div class="card-body">
+                        <h4><?php echo $pppk; ?></h4>
+                      </div>
+                      <div class="card-footer d-flex align-items-center justify-content-between">
+                        <h6>PPPK</h6>
+                        <div class="small text-white"><i class="fas fa-chalkboard-teacher"></i></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <div class="card bg-danger text-white mb-1">
+                      <div class="card-body">
+                        <h4><?php echo $tenaga_kontrak; ?></h4>
+                      </div>
+                      <div class="card-footer d-flex align-items-center justify-content-between">
+                        <h6>Tenaga Kontrak</h6>
+                        <div class="small text-white"><i class=""></i></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="card bg-secondary text-white mb-1">
+                      <div class="card-body">
+                        <h4><?php echo $total_pendidik; ?></h4>
+                      </div>
+                      <div class="card-footer d-flex align-items-center justify-content-between">
+                        <h6>Total Pendidik</h6>
+                        <div class="small text-white"><i class="fas fa-chalkboard-teacher"></i></div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="col-xl-2 col-sm-6 col-12">
-                  <div class="card">
-                    <div class="card-content">
-                      <div class="card-body">
-                        <div class="media d-flex">
-                          <div class="media-body text-left">
-                            <h3 class="warning"><?php echo $honorer ?></h3>
-                            <span>Honorer</span>
-                          </div>
-                          <div class="align-self-center">
-                            <i class="icon-bubbles warning font-large-2 float-right"></i>
-                          </div>
-                        </div>
-                        <div class="progress mt-1 mb-0" style="height: 7px;">
-                          <div class="progress-bar bg-warning" role="progressbar" style="width: 100%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-xl-2 col-sm-6 col-12">
-                  <div class="card">
-                    <div class="card-content">
-                      <div class="card-body">
-                        <div class="media d-flex">
-                          <div class="media-body text-left">
-                            <h3 class="success"><?php echo $pppk; ?></h3>
-                            <span>PPPK</span>
-                          </div>
-                        </div>
-                        <div class="progress mt-1 mb-0" style="height: 7px;">
-                          <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-xl-2 col-sm-6 col-12">
-                  <div class="card">
-                    <div class="card-content">
-                      <div class="card-body">
-                        <div class="media d-flex">
-                          <div class="media-body text-left">
-                            <h3 class="danger"><?php echo $tenaga_kontrak; ?></h3>
-                            <span>Tenaga Kontrak</span>
-                          </div>
-                          <div class="align-self-center">
-                            <i class="icon-direction danger font-large-2 float-right"></i>
-                          </div>
-                        </div>
-                        <div class="progress mt-1 mb-0" style="height: 7px;">
-                          <div class="progress-bar bg-info" role="progressbar" style="width: 100%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-xl-4 col-sm-6 col-12">
-                  <div class="card">
-                    <div class="card-content">
-                      <div class="card-body">
-                        <div class="media d-flex">
-                          <div class="media-body text-left">
-                            <h3 class="danger"><?php echo $total_pendidik; ?></h3>
-                            <h6>Total Pendidik</h6>
-                          </div>
-                        </div>
-                        <div class="progress mt-1 mb-0" style="height: 7px;">
-                          <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
-          </div>
-          <div class="card">
-            <div class="card-body">
-              <table id="datatablesSimple">
-                <thead style="background-color:lightgray;">
-                  <tr style="font-size: 16px;">
-                    <th class="col-md-1">no</th>
-                    <th>Nama Paud</th>
-                    <th>Waktu Pengiriman</th>
-                    <th>Bulan</th>
-                    <th>Tahun</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php
-                  $no = 1;
-                  if (isset($_POST['submit'])) {
-                    $tahun = $_POST['tahun'];
-                    $bulan = $_POST['bulan'];
-                    $laporan = mysqli_query($conn, "SELECT * FROM admin_peserta_didik LEFT JOIN user USING (id_author) WHERE bulan LIKE '%" . $bulan . "%' AND tahun LIKE '%" . $tahun . "%' ORDER BY tanggal_kirim DESC");
-                  } else {
-                    $laporan = mysqli_query($conn, "SELECT * FROM admin_peserta_didik LEFT JOIN user USING (id_author) ORDER BY tanggal_kirim DESC");
-                  }
-                  // $dan = html_entity_decode();
-                  if (mysqli_num_rows($laporan) > 0) {
-                    while ($p = mysqli_fetch_array($laporan)) {
-                  ?>
-                      <tr style="font-size: 16px;" id="klik-tabel">
-                        <td><?php echo $no++ ?></td>
-                        <td>
-                          <a href="laporan-paud.php?id=<?php echo $p['id_laporan']; ?>&identitas=<?php echo $p['id_author']; ?>" style="text-decoration:none; color:darkblue;">
-                            <div class="klik-tabel"><?php echo $p['nama_paud']; ?></div>
-                          </a>
-                        </td>
-                        <td><?php echo $p['tanggal_kirim']; ?></td>
-                        <td><?php echo $p['bulan']; ?></td>
-                        <td><?php echo $p['tahun']; ?></td>
-                      </tr>
-                  <?php }
-                  } ?>
-                </tbody>
-              </table>
+              </section>
             </div>
-          </div>
+            <div class="">
+              <section id="minimal-statistics">
+
+                <?php
+                // s1
+                $ambil_s1 = mysqli_query($conn, "SELECT * FROM tenaga_pendidik WHERE pendidikan_terakhir LIKE 'S1%' OR pendidikan_terakhir LIKE 'sarjana%' OR pendidikan_terakhir LIKE 'STRATA 1%'");
+                $s1 = mysqli_num_rows($ambil_s1);
+                // s2
+                $ambil_s2 = mysqli_query($conn, "SELECT * FROM tenaga_pendidik WHERE pendidikan_terakhir LIKE 's2%' OR pendidikan_terakhir LIKE 'dua%'");
+                $s2 = mysqli_num_rows($ambil_s2);
+
+                // sma
+                $ambil_sma = mysqli_query($conn, "SELECT * FROM tenaga_pendidik WHERE pendidikan_terakhir LIKE 'sma%' OR pendidikan_terakhir LIKE 'smk%' OR pendidikan_terakhir LIKE 'man%' OR pendidikan_terakhir LIKE 'slta%' OR pendidikan_terakhir LIKE 'smea%' OR pendidikan_terakhir LIKE 'smu%' OR pendidikan_terakhir LIKE 'stm%' OR pendidikan_terakhir LIKE 'paket c%' OR pendidikan_terakhir LIKE 'madrasah aliah%' OR pendidikan_terakhir LIKE 'MA%'");
+                $sma = mysqli_num_rows($ambil_sma);
+
+                // smp
+                $ambil_smp = mysqli_query($conn, "SELECT * FROM tenaga_pendidik WHERE pendidikan_terakhir LIKE 'smp%' OR pendidikan_terakhir LIKE 'sltp%' OR pendidikan_terakhir LIKE 'mts%' OR pendidikan_terakhir LIKE 'paket b%'");
+                $smp = mysqli_num_rows($ambil_smp);
+
+                // sd
+                $ambil_sd = mysqli_query($conn, "SELECT * FROM tenaga_pendidik WHERE pendidikan_terakhir LIKE 'sd%' OR pendidikan_terakhir LIKE 'paket a%'");
+                $sekolah_dasar = mysqli_num_rows($ambil_sd);
+
+                // D1 D2 D3
+                $ambil_d123 = mysqli_query($conn, "SELECT * FROM tenaga_pendidik WHERE pendidikan_terakhir LIKE 'd1%' OR pendidikan_terakhir LIKE 'd2%' OR pendidikan_terakhir LIKE 'd3%' OR pendidikan_terakhir LIKE 'diii%' OR pendidikan_terakhir LIKE 'd.iii%' OR pendidikan_terakhir LIKE 'dii%'");
+                $d123 = mysqli_num_rows($ambil_d123);
+
+                ?>
+                <div class="row bg-light pt-3 pb-3">
+                  <h6>Tingkat Pendidikan</h6>
+                  <div class="col-md-2 col-12">
+                    <div class="card">
+                      <div class="card-content">
+                        <div class="card-body">
+                          <div class="media d-flex">
+                            <div class="media-body text-left">
+                              <h3 class="warning"><?php echo $s2 ?></h3>
+                              <span>S2</span>
+                            </div>
+                            <div class="align-self-center">
+                              <i class="icon-bubbles warning font-large-2 float-right"></i>
+                            </div>
+                          </div>
+                          <div class="progress mt-1 mb-0" style="height: 7px;">
+                            <div class="progress-bar bg-warning" role="progressbar" style="width: 100%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="50"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-2 col-12">
+                    <div class="card">
+                      <div class="card-content">
+                        <div class="card-body">
+                          <div class="media d-flex">
+                            <div class="media-body text-left">
+                              <h3 class="primary"><?php echo $s1; ?></h3>
+                              <span>S1</span>
+                            </div>
+                            <div class="align-self-center">
+                              <i class="icon-book-open primary font-large-2 float-right"></i>
+                            </div>
+                          </div>
+                          <div class="progress mt-1 mb-0" style="height: 7px;">
+                            <div class="progress-bar bg-info" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-2 col-12">
+                    <div class="card">
+                      <div class="card-content">
+                        <div class="card-body">
+                          <div class="media d-flex">
+                            <div class="media-body text-left">
+                              <h3 class="primary"><?php echo $d123; ?></h3>
+                              <span>D1 - D3</span>
+                            </div>
+                            <div class="align-self-center">
+                              <i class="icon-book-open primary font-large-2 float-right"></i>
+                            </div>
+                          </div>
+                          <div class="progress mt-1 mb-0" style="height: 7px;">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-2 col-12">
+                    <div class="card">
+                      <div class="card-content">
+                        <div class="card-body">
+                          <div class="media d-flex">
+                            <div class="media-body text-left">
+                              <h3 class="success"><?php echo $sma; ?></h3>
+                              <span>SMA Sederajat</span>
+                            </div>
+                          </div>
+                          <div class="progress mt-1 mb-0" style="height: 7px;">
+                            <div class="progress-bar bg-secondary" role="progressbar" style="width: 100%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-2 col-12">
+                    <div class="card">
+                      <div class="card-content">
+                        <div class="card-body">
+                          <div class="media d-flex">
+                            <div class="media-body text-left">
+                              <h3 class="danger"><?php echo $smp; ?></h3>
+                              <span>SMP Sederajat</span>
+                            </div>
+                            <div class="align-self-center">
+                              <i class="icon-direction danger font-large-2 float-right"></i>
+                            </div>
+                          </div>
+                          <div class="progress mt-1 mb-0" style="height: 7px;">
+                            <div class="progress-bar bg-primary" role="progressbar" style="width: 100%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-2 col-12">
+                    <div class="card">
+                      <div class="card-content">
+                        <div class="card-body">
+                          <div class="media d-flex">
+                            <div class="media-body text-left">
+                              <h3 class="danger"><?php echo $sekolah_dasar; ?></h3>
+                              <span>SD Sederajat</span>
+                            </div>
+                            <div class="align-self-center">
+                              <i class="icon-direction danger font-large-2 float-right"></i>
+                            </div>
+                          </div>
+                          <div class="progress mt-1 mb-0" style="height: 7px;">
+                            <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+            <div class="card">
+              <div class="card-body">
+                <table id="datatablesSimple">
+                  <thead style="background-color:lightgray;">
+                    <tr style="font-size: 16px;">
+                      <th>Nama Pendidik</th>
+                      <th>L/K</th>
+                      <th>Jabatan</th>
+                      <th>Status</th>
+                      <th>Tempat Lahir</th>
+                      <th>Tanggal Lahir</th>
+                      <th>Pendidikan</th>
+                      <th>Mulai Tugas</th>
+                      <th>PAUD</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php
+                    $no = 1;
+                    $get_pendidik = mysqli_query($conn, "SELECT * FROM tenaga_pendidik LEFT JOIN user USING (id_author) ORDER BY nama_pendidik ASC");
+                    while ($p = mysqli_fetch_array($get_pendidik)) {
+                    ?>
+                      <tr style="font-size: 16px;" id="klik-tabel">
+                        <td><?php echo $p['nama_pendidik']; ?></td>
+                        <td><?php echo $p['jenis_kelamin']; ?></td>
+                        <td><?php echo $p['jabatan']; ?></td>
+                        <td><?php echo $p['status']; ?></td>
+                        <td><?php echo $p['tempat_lahir']; ?></td>
+                        <td><?php echo $p['tanggal_lahir']; ?></td>
+                        <td><?php echo $p['pendidikan_terakhir']; ?></td>
+                        <td><?php echo $p['tanggal_mulai_tugas']; ?></td>
+                        <td><?php echo $p['nama_paud']; ?></td>
+                      </tr>
+                    <?php } ?>
+                  </tbody>
+                </table>
+              </div>
+            </div>
         </div>
       </main>
       <footer class="py-4 bg-light mt-auto">

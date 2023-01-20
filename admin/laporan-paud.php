@@ -1,8 +1,8 @@
 <?php
 include("../db.php");
 session_start();
-if(!isset($_SESSION["admin"])){
-     echo "<script>location='../index.php'</script>";
+if (!isset($_SESSION["admin"])) {
+   echo "<script>location='../index.php'</script>";
 }
 
 ?>
@@ -225,6 +225,12 @@ if(!isset($_SESSION["admin"])){
                         <i class="fas fa-book-open"></i>
                      </div>
                      Laporan
+                  </a>
+                  <a class="nav-link" href="tenaga-pendidik.php">
+                     <div class="sb-nav-link-icon">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                     </div>
+                     Tenaga Pendidik
                   </a>
                </div>
             </div>

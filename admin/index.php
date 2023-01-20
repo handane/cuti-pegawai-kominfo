@@ -82,6 +82,12 @@ if (!isset($_SESSION["admin"])) {
                      </div>
                      Laporan
                   </a>
+                  <a class="nav-link" href="tenaga-pendidik.php">
+                     <div class="sb-nav-link-icon">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                     </div>
+                     Tenaga Pendidik
+                  </a>
                </div>
             </div>
             <div class="sb-sidenav-footer">
@@ -102,130 +108,6 @@ if (!isset($_SESSION["admin"])) {
                   <div class="col-md-6 card-body">
                      <h6>Selamat Datang, <?php echo $_SESSION['admin']['nama_admin']; ?></h6>
                   </div>
-               </div>
-               <!--  -->
-               <div class="">
-                  <section id="minimal-statistics">
-                     <div class="row">
-                        <div class="col-12 mt-3 mb-1">
-                           </div>
-                        </div>
-                        <?php 
-                        // PNS
-                           $ambil_pns = mysqli_query($conn, "SELECT * FROM tenaga_pendidik WHERE status = 'pns'");
-                           $pns = mysqli_num_rows($ambil_pns);
-                        // HONORER
-                           $ambil_honorer = mysqli_query($conn, "SELECT * FROM tenaga_pendidik WHERE status = 'Honorer'");
-                           $honorer = mysqli_num_rows($ambil_honorer);
-                           
-                        // PPPK
-                           $ambil_pppk = mysqli_query($conn, "SELECT * FROM tenaga_pendidik WHERE status = 'pppk'");
-                           $pppk = mysqli_num_rows($ambil_pppk);
-                        // tenaga kontrak
-                           $ambil_tenaga_kontrak = mysqli_query($conn, "SELECT * FROM tenaga_pendidik WHERE status = 'tenaga kontrak'");
-                           $tenaga_kontrak = mysqli_num_rows($ambil_tenaga_kontrak);
-                        // Total
-                           $ambil_total_pendidik = mysqli_query($conn, "SELECT * FROM tenaga_pendidik");
-                           $total_pendidik = mysqli_num_rows($ambil_total_pendidik);
-                        ?>
-                        <div class="row bg-light pt-3 pb-5">
-                        <h6 class="mt-2 mb-3">Tenaga Pendidik</h6>
-                        <div class="col-xl-2 col-sm-6 col-12">
-                           <div class="card">
-                              <div class="card-content">
-                                 <div class="card-body">
-                                    <div class="media d-flex">
-                                       <div class="media-body text-left">
-                                          <h3 class="primary"><?php echo $pns; ?></h3>
-                                          <span>PNS</span>
-                                       </div>
-                                       <div class="align-self-center">
-                                          <i class="icon-book-open primary font-large-2 float-right"></i>
-                                       </div>
-                                    </div>
-                                    <div class="progress mt-1 mb-0" style="height: 7px;">
-                                       <div class="progress-bar bg-primary" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="col-xl-2 col-sm-6 col-12">
-                           <div class="card">
-                              <div class="card-content">
-                                 <div class="card-body">
-                                    <div class="media d-flex">
-                                       <div class="media-body text-left">
-                                          <h3 class="warning"><?php echo $honorer ?></h3>
-                                          <span>Honorer</span>
-                                       </div>
-                                       <div class="align-self-center">
-                                          <i class="icon-bubbles warning font-large-2 float-right"></i>
-                                       </div>
-                                    </div>
-                                    <div class="progress mt-1 mb-0" style="height: 7px;">
-                                       <div class="progress-bar bg-warning" role="progressbar" style="width: 100%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="col-xl-2 col-sm-6 col-12">
-                           <div class="card">
-                              <div class="card-content">
-                                 <div class="card-body">
-                                    <div class="media d-flex">
-                                       <div class="media-body text-left">
-                                          <h3 class="success"><?php echo $pppk; ?></h3>
-                                          <span>PPPK</span>
-                                       </div>
-                                    </div>
-                                    <div class="progress mt-1 mb-0" style="height: 7px;">
-                                       <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="col-xl-2 col-sm-6 col-12">
-                           <div class="card">
-                              <div class="card-content">
-                                 <div class="card-body">
-                                    <div class="media d-flex">
-                                       <div class="media-body text-left">
-                                          <h3 class="danger"><?php echo $tenaga_kontrak; ?></h3>
-                                          <span>Tenaga Kontrak</span>
-                                       </div>
-                                       <div class="align-self-center">
-                                          <i class="icon-direction danger font-large-2 float-right"></i>
-                                       </div>
-                                    </div>
-                                    <div class="progress mt-1 mb-0" style="height: 7px;">
-                                       <div class="progress-bar bg-info" role="progressbar" style="width: 100%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="col-xl-4 col-sm-6 col-12">
-                           <div class="card">
-                              <div class="card-content">
-                                 <div class="card-body">
-                                    <div class="media d-flex">
-                                       <div class="media-body text-left">
-                                          <h3 class="danger"><?php echo $total_pendidik; ?></h3>
-                                          <h6>Total Pendidik</h6>
-                                       </div>
-                                    </div>
-                                    <div class="progress mt-1 mb-0" style="height: 7px;">
-                                       <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </section>
                </div>
          </main>
          <footer class="py-4 bg-light mt-auto">
