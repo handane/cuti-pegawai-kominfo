@@ -16,6 +16,7 @@ if (!isset($_SESSION["admin"])) {
    <meta name="description" content="" />
    <meta name="author" content="" />
    <title>SIDINI</title>
+   <link rel="icon" type="image/png" href="../foto/tut wuri.png">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
    <link href="../css/styles.css" rel="stylesheet" />
@@ -133,7 +134,7 @@ if (!isset($_SESSION["admin"])) {
                                  <?php
                                  $no = 1;
                                  $admin = $_SESSION['admin']['id_admin'];
-                                 $x = mysqli_query($conn, "SELECT * FROM user");
+                                 $x = mysqli_query($conn, "SELECT * FROM user ORDER BY nama_paud ASC");
                                  if (mysqli_num_rows($x) > 0) {
                                     while ($p = mysqli_fetch_array($x)) {
                                  ?>

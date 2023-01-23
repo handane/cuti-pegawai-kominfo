@@ -16,6 +16,7 @@ if (!isset($_SESSION["user"])) {
    <meta name="description" content="" />
    <meta name="author" content="" />
    <title>SIDINI</title>
+   <link rel="icon" type="image/png" href="foto/tut wuri.png">
    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
    <link href="css/styles.css" rel="stylesheet" />
    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
@@ -140,7 +141,13 @@ if (!isset($_SESSION["user"])) {
          <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
             <div class="sb-sidenav-menu">
                <div class="nav">
-                  <div class="sb-sidenav-menu-heading">Laporan</div>
+                  <div class="sb-sidenav-menu-heading">main</div>
+                  <a class="nav-link" href="dashboard.php">
+                     <div class="sb-nav-link-icon">
+                        <i class="fas fa-home"></i>
+                     </div>
+                     Home
+                  </a>
                   <a class="nav-link aktif" href="laporan.php">
                      <div class="sb-nav-link-icon">
                         <i class="far fa-calendar"></i>
@@ -153,7 +160,6 @@ if (!isset($_SESSION["user"])) {
                      </div>
                      Riwayat Laporan
                   </a>
-                  <div class="sb-sidenav-menu-heading">Laman</div>
                   <a class="nav-link" href="paud.php">
                      <div class="sb-nav-link-icon">
                         <i class="fas fa-book"></i>
@@ -1112,7 +1118,7 @@ if (!isset($_SESSION["user"])) {
    <script src="js/scripts.js"></script>
    <script src="assets/demo/chart-area-demo.js"></script>
    <script src="assets/demo/chart-bar-demo.js"></script>
-   <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+   <script src="datatables/datatable.js"></script>
    <script src="js/datatables-simple-demo.js"></script>
    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
 </body>

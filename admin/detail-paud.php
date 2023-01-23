@@ -1,6 +1,7 @@
 <?php
 include("../db.php");
 session_start();
+$id_ambil = $_GET['id'];
 if (!isset($_SESSION["admin"])) {
    echo "<script>location='index.php'</script>";
 }
@@ -16,6 +17,7 @@ if (!isset($_SESSION["admin"])) {
    <meta name="description" content="" />
    <meta name="author" content="" />
    <title>SIDINI</title>
+   <link rel="icon" type="image/png" href="../foto/tut wuri.png">
    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
    <link href="../css/styles.css" rel="stylesheet" />
    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
@@ -109,7 +111,7 @@ if (!isset($_SESSION["admin"])) {
       <div id="layoutSidenav_content" class="bgc">
          <main>
             <?php
-            $id_ambil = $_GET['id'];
+
             $x = mysqli_query($conn, "SELECT * FROM user WHERE id_author='$id_ambil'");
             if (mysqli_num_rows($x) > 0) {
                while ($p = mysqli_fetch_array($x)) {
@@ -141,6 +143,82 @@ if (!isset($_SESSION["admin"])) {
                            </div>
                         </li>
                      </ol>
+                     <!--  -->
+                     <div class="row bg-light pt-3 pb-3">
+                        <?php
+                        // pendidik
+                        $tp_paud = mysqli_query($conn, "SELECT * FROM tenaga_pendidik WHERE id_author = '$id_ambil'");
+                        $tp = mysqli_num_rows($tp_paud);
+                        // peserta didik
+                        $pd_paud = mysqli_query($conn, "SELECT * FROM peserta_didik WHERE id_author = '$id_ambil'");
+                        $apd = mysqli_fetch_array($pd_paud);
+                        $t_pd = $apd['L12'] + $apd['P12'] + $apd['L3'] + $apd['P3'] + $apd['L4'] + $apd['P4'] + $apd['L56'] + $apd['P56'];
+                        // laporan masuk
+                        $laporan_paud = mysqli_query($conn, "SELECT * FROM admin_peserta_didik WHERE id_author = '$id_ambil'");
+                        $total_laporan = mysqli_num_rows($laporan_paud);
+                        ?>
+                        <div class="col-md-3 col-12">
+                           <div class="card">
+                              <div class="card-content">
+                                 <div class="card-body">
+                                    <div class="media d-flex">
+                                       <div class="media-body text-left">
+                                          <h3 class="warning"><?php echo $tp; ?></h3>
+                                          <h6>Jumlah Tenaga Pendidik</h6>
+                                       </div>
+                                       <div class="align-self-center">
+                                          <i class="icon-bubbles warning font-large-2 float-right"></i>
+                                       </div>
+                                    </div>
+                                    <div class="progress mt-1 mb-0" style="height: 7px;">
+                                       <div class="progress-bar bg-warning" role="progressbar" style="width: 100%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="50"></div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-md-3 col-12">
+                           <div class="card">
+                              <div class="card-content">
+                                 <div class="card-body">
+                                    <div class="media d-flex">
+                                       <div class="media-body text-left">
+                                          <h3 class="primary"><?php echo $t_pd; ?></h3>
+                                          <h6>Jumlah Peserta Didik</h6>
+                                       </div>
+                                       <div class="align-self-center">
+                                          <i class="icon-book-open primary font-large-2 float-right"></i>
+                                       </div>
+                                    </div>
+                                    <div class="progress mt-1 mb-0" style="height: 7px;">
+                                       <div class="progress-bar bg-info" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-md-3 col-12">
+                           <div class="card">
+                              <div class="card-content">
+                                 <div class="card-body">
+                                    <div class="media d-flex">
+                                       <div class="media-body text-left">
+                                          <h3 class="primary"><?php echo $total_laporan; ?></h3>
+                                          <h6>Total Laporan Masuk</h6>
+                                       </div>
+                                       <div class="align-self-center">
+                                          <i class="icon-book-open primary font-large-2 float-right"></i>
+                                       </div>
+                                    </div>
+                                    <div class="progress mt-1 mb-0" style="height: 7px;">
+                                       <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <!--  -->
                      <div class="col-md-6">
                         <div class="card">
                            <div class="card-header">
@@ -234,30 +312,23 @@ if (!isset($_SESSION["admin"])) {
                                     <?php
                                     $no = 1;
                                     // $id_author = $_SESSION['user']['id_author'];
-                                    if (isset($_POST['submit'])) {
-                                       $tahun = $_POST['tahun'];
-                                       $bulan = $_POST['bulan'];
-                                       $laporan = mysqli_query($conn, "SELECT * FROM admin_peserta_didik LEFT JOIN user USING (id_author) WHERE id_author = '$_GET[id]' AND bulan LIKE '%" . $bulan . "%' AND tahun LIKE '%" . $tahun . "%' ORDER BY tanggal_kirim DESC");
-                                    } else {
-                                       $laporan = mysqli_query($conn, "SELECT * FROM admin_peserta_didik LEFT JOIN user USING (id_author) WHERE id_author = '$_GET[id]' ORDER BY tanggal_kirim DESC");
-                                    }
+                                    $laporan = mysqli_query($conn, "SELECT * FROM admin_peserta_didik LEFT JOIN user USING (id_author) WHERE id_author = '$_GET[id]' ORDER BY tanggal_kirim DESC");
                                     if (mysqli_num_rows($laporan) > 0) {
                                        while ($p = mysqli_fetch_array($laporan)) {
                                     ?>
 
-
                                           <tr style="font-size: 16px;" id="klik-tabel">
                                              <td>
-                                                <a href="detail-laporan.php?page=dot&identitas=<?php echo $p['id_author']; ?>?page=dot&id=<?php echo $p['id_laporan']; ?>" style="text-decoration:none; color:darkblue;">
+                                                <a href="laporan-paud.php?identitas=<?php echo $p['id_author']; ?>&id=<?php echo $p['id_laporan']; ?>" style="text-decoration:none; color:darkblue;">
+
                                                    <div class="klik-tabel"><?php echo $p['nama_paud']; ?></div>
                                                 </a>
+
                                              </td>
                                              <td><?php echo $p['tanggal_kirim']; ?></td>
                                              <td><?php echo $p['bulan']; ?></td>
                                              <td><?php echo $p['tahun']; ?></td>
                                           </tr>
-
-
                                     <?php }
                                     } ?>
                                  </tbody>

@@ -1,6 +1,7 @@
 <?php
 session_start();
 include("db.php");
+$id_author = $_SESSION['user']['id_author'];
 if (!isset($_SESSION["user"])) {
    echo "<script>location='index.php'</script>";
 }
@@ -16,6 +17,7 @@ if (!isset($_SESSION["user"])) {
    <meta name="description" content="" />
    <meta name="author" content="" />
    <title>SIDINI</title>
+   <link rel="icon" type="image/png" href="foto/tut wuri.png">
    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
    <link href="css/styles.css" rel="stylesheet" />
    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
@@ -62,7 +64,13 @@ if (!isset($_SESSION["user"])) {
          <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
             <div class="sb-sidenav-menu">
                <div class="nav">
-                  <div class="sb-sidenav-menu-heading">Laporan</div>
+                  <div class="sb-sidenav-menu-heading">main</div>
+                  <a class="nav-link" href="dashboard.php">
+                     <div class="sb-nav-link-icon">
+                        <i class="fas fa-home"></i>
+                     </div>
+                     Home
+                  </a>
                   <a class="nav-link" href="laporan.php">
                      <div class="sb-nav-link-icon">
                         <i class="far fa-calendar"></i>
@@ -75,7 +83,6 @@ if (!isset($_SESSION["user"])) {
                      </div>
                      Riwayat Laporan
                   </a>
-                  <div class="sb-sidenav-menu-heading">Laman</div>
                   <a class="nav-link" href="paud.php">
                      <div class="sb-nav-link-icon">
                         <i class="fas fa-book"></i>
@@ -123,7 +130,35 @@ if (!isset($_SESSION["user"])) {
                <ol class="breadcrumb mb-3">
                   <li class="breadcrumb-item active">Riwayat</li>
                </ol>
-
+               <!--  -->
+               <div class="row bg-light pt-3 pb-3">
+                  <?php
+                  // laporan masuk
+                  $laporan_paud = mysqli_query($conn, "SELECT * FROM admin_peserta_didik WHERE id_author = '$id_author'");
+                  $total_laporan = mysqli_num_rows($laporan_paud);
+                  ?>
+                  <div class="col-md-3 col-12">
+                     <div class="card">
+                        <div class="card-content">
+                           <div class="card-body">
+                              <div class="media d-flex">
+                                 <div class="media-body text-left">
+                                    <h3 class="primary"><?php echo $total_laporan; ?></h3>
+                                    <h6>Total Laporan Terkirm</h6>
+                                 </div>
+                                 <div class="align-self-center">
+                                    <i class="icon-book-open primary font-large-2 float-right"></i>
+                                 </div>
+                              </div>
+                              <div class="progress mt-1 mb-0" style="height: 7px;">
+                                 <div class="progress-bar bg-info" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <!--  -->
                <div class="card">
                   <form action="" method="POST">
                      <div class="card-body row">
@@ -169,7 +204,7 @@ if (!isset($_SESSION["user"])) {
                         <tbody>
                            <?php
                            $no = 1;
-                           $id_author = $_SESSION['user']['id_author'];
+
                            if (isset($_POST['submit'])) {
                               $tahun = $_POST['tahun'];
                               $bulan = $_POST['bulan'];
@@ -222,7 +257,7 @@ if (!isset($_SESSION["user"])) {
    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
    <script src="assets/demo/chart-area-demo.js"></script>
    <script src="assets/demo/chart-bar-demo.js"></script>
-   <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+   <script src="datatables/datatable.js"></script>
    <script src="js/datatables-simple-demo.js"></script>
 </body>
 

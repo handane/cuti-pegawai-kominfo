@@ -12,6 +12,7 @@ include("db.php");
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <!-- CSS only -->
    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+   <link rel="icon" type="image/png" href="foto/tut wuri.png">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
    <link href="css/styles.css" rel="stylesheet" />
@@ -194,7 +195,7 @@ include("db.php");
          if ($akunyangcocok == 1) {
             $akun = $ambil->fetch_assoc();
             $_SESSION["user"] = $akun;
-            echo "<script>location='paud.php';</script>";
+            echo "<script>location='dashboard.php';</script>";
          } elseif ($akunyangcocok2 == 1) {
             $akun1 = $ambiladmin->fetch_assoc();
             $_SESSION["admin"] = $akun1;
@@ -216,7 +217,7 @@ include("db.php");
    <script src="js/scripts.js"></script>
    <script src="assets/demo/chart-area-demo.js"></script>
    <script src="assets/demo/chart-bar-demo.js"></script>
-   <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+   <script src="datatables/datatable.js"></script>
    <script src="js/datatables-simple-demo.js"></script>
    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
 </body>

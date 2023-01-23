@@ -16,6 +16,7 @@ if (!isset($_SESSION["user"])) {
    <meta name="description" content="" />
    <meta name="author" content="" />
    <title>SIDINI</title>
+   <link rel="icon" type="image/png" href="foto/tut wuri.png">
    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
    <link href="css/styles.css" rel="stylesheet" />
    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
@@ -100,7 +101,13 @@ if (!isset($_SESSION["user"])) {
          <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
             <div class="sb-sidenav-menu">
                <div class="nav">
-                  <div class="sb-sidenav-menu-heading">Laporan</div>
+                  <div class="sb-sidenav-menu-heading">main</div>
+                  <a class="nav-link" href="dashboard.php">
+                     <div class="sb-nav-link-icon">
+                        <i class="fas fa-home"></i>
+                     </div>
+                     Home
+                  </a>
                   <a class="nav-link" href="laporan.php">
                      <div class="sb-nav-link-icon">
                         <i class="far fa-calendar"></i>
@@ -113,7 +120,6 @@ if (!isset($_SESSION["user"])) {
                      </div>
                      Riwayat Laporan
                   </a>
-                  <div class="sb-sidenav-menu-heading">Laman</div>
                   <a class="nav-link" href="paud.php">
                      <div class="sb-nav-link-icon">
                         <i class="fas fa-book"></i>
@@ -179,7 +185,7 @@ if (!isset($_SESSION["user"])) {
                         <div class="col-md-6">
                            <label for="" class="form-label-md"><b>Jenis Kelamin</b></label>
                            <select class="form-select form-select-md" aria-label=".form-select-sm example" name="jenis_kelamin">
-                              <option>--</option>
+                              <option></option>
                               <option value="L">Laki-laki</option>
                               <option value="P">Perempuan</option>
                            </select>
@@ -191,11 +197,25 @@ if (!isset($_SESSION["user"])) {
                         </div>
                         <div class="col-md-6">
                            <label for="" class="form-label-md"><b>Pendidikan Terakhir</b></label>
-                           <input type="text" class="form-control" name="pendidikan_terakhir" />
+                           <select class="form-select form-select-md" aria-label=".form-select-sm example" name="pendidikan_terakhir" required>
+                              <option></option>
+                              <option value="Tidak Sekolah">Tidak Sekolah</option>
+                              <option value="SD">SD/Sederajat</option>
+                              <option value="SMP">SMP/Sederajat</option>
+                              <option value="SMA">SMA/SMK/MA/Sederajat</option>
+                              <option value="D1">D1</option>
+                              <option value="D2">D2</option>
+                              <option value="D3">D3</option>
+                              <option value="D4">D4</option>
+                              <option value="S1">S1</option>
+                              <option value="S2">S2</option>
+                              <option value="S3">S3</option>
+                           </select>
                         </div>
                         <div class="col-md-6">
                            <label for="" class="form-label-md"><b>Status Pendidik</b></label>
-                           <select class="form-select form-select-md" aria-label=".form-select-sm example" name="status">
+                           <select class="form-select form-select-md" aria-label=".form-select-sm example" name="status" required>
+                              <option></option>
                               <option value="PNS">PNS</option>
                               <option value="PPPK">PPPK</option>
                               <option value="Honorer">Honorer</option>
@@ -285,7 +305,7 @@ if (!isset($_SESSION["user"])) {
    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
    <script src="assets/demo/chart-area-demo.js"></script>
    <script src="assets/demo/chart-bar-demo.js"></script>
-   <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+   <script src="datatables/datatable.js"></script>
    <script src="js/datatables-simple-demo.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js" integrity="sha256-8nZlwiYjMLBTg03gFKmhxYl0GVyuUyELAPGQJiWD0jQ=" crossorigin="anonymous"></script>
    <script type="text/javascript">

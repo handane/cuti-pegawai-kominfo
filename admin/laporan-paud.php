@@ -16,6 +16,7 @@ if (!isset($_SESSION["admin"])) {
    <meta name="description" content="" />
    <meta name="author" content="" />
    <title>SIDINI</title>
+   <link rel="icon" type="image/png" href="../foto/tut wuri.png">
    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
    <link href="../css/styles.css" rel="stylesheet" />
    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
@@ -259,7 +260,7 @@ if (!isset($_SESSION["admin"])) {
                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteLaporan" style="float: right;"> Hapus Laporan
                               <img src="../icons/file-earmark-x.svg" alt="" style="margin-bottom:3px;">
                            </button>
-                           <a href="../pdf.php?page=dot&identitas=<?php echo $p['id_author']; ?>?page=dot&id=<?php echo $p['id_laporan']; ?>" style="float: right; margin-right : 10px;" class="btn btn-sm btn-success">Unduh PDF <img src="../icons/download.svg" alt=""></a>
+                           <a href="../pdf.php?identitas=<?php echo $p['id_author']; ?>&id=<?php echo $p['id_laporan']; ?>" style="float: right; margin-right : 10px;" class="btn btn-sm btn-success">Unduh PDF <img src="../icons/download.svg" alt=""></a>
 
                            <div class="modal fade" id="deleteLaporan" tabindex="-1" role="dialog" aria-labelledby="deleteLaporanLabel" aria-hidden="true">
                               <div class="modal-dialog dialog-sm">

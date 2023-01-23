@@ -14,9 +14,11 @@ if (!isset($_SESSION["admin"])) {
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SIDINI</title>
+  <link rel="icon" type="image/png" href="../foto/tut wuri.png">
   <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
   <link href="../css/styles.css" rel="stylesheet" />
   <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+  <script src="../datatables/datatable.js"></script>
   <style>
     .klik-tabel {
       padding: 0;
@@ -216,7 +218,7 @@ if (!isset($_SESSION["admin"])) {
 
                 ?>
                 <div class="row bg-light pt-3 pb-3">
-                  <h6>Tingkat Pendidikan</h6>
+                  <h6>Tingkat Pendidikan Tenaga Pendidik</h6>
                   <div class="col-md-2 col-12">
                     <div class="card">
                       <div class="card-content">
@@ -401,7 +403,7 @@ if (!isset($_SESSION["admin"])) {
   <script src="../assets/demo/chart-bar-demo.js"></script>
   <script src="../js/datatables-simple-demo.js"></script>
   <!-- <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script> -->
-  <script src="../datatables/datatable.js"></script>
+
 
 </body>
 

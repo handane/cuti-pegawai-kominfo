@@ -66,7 +66,13 @@ if (!isset($_SESSION["user"])) {
          <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
             <div class="sb-sidenav-menu">
                <div class="nav">
-                  <div class="sb-sidenav-menu-heading">Laporan</div>
+                  <div class="sb-sidenav-menu-heading">main</div>
+                  <a class="nav-link" href="dashboard.php">
+                     <div class="sb-nav-link-icon">
+                        <i class="fas fa-home"></i>
+                     </div>
+                     Home
+                  </a>
                   <a class="nav-link" href="laporan.php">
                      <div class="sb-nav-link-icon">
                         <i class="far fa-calendar"></i>
@@ -79,7 +85,6 @@ if (!isset($_SESSION["user"])) {
                      </div>
                      Riwayat Laporan
                   </a>
-                  <div class="sb-sidenav-menu-heading">Laman</div>
                   <a class="nav-link" href="paud.php">
                      <div class="sb-nav-link-icon">
                         <i class="fas fa-book"></i>
