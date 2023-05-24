@@ -1,225 +1,174 @@
-<?php
-// include our connect script 
+<?php 
+  require('database/db.php');
 session_start();
-include("db.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-   <meta charset="UTF-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <!-- CSS only -->
-   <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
-   <link rel="icon" type="image/png" href="foto/tut wuri.png">
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-   <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
-   <link href="css/styles.css" rel="stylesheet" />
-   <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 
-   <!-- JavaScript Bundle with Popper -->
-   <title>SIDINI | Login</title>
-   <style>
-      .form-bg {
-         background: linear-gradient(to bottom, #04795A, #0BD6A0);
-         height: 100vh;
-         display: flex;
-         align-items: center;
-      }
+  <style>
+    .gradient-custom {
+      /* fallback for old browsers */
+      background: #6a11cb;
 
-      .container {
-         margin: 0 auto;
-      }
+      /* Chrome 10-25, Safari 5.1-6 */
+      background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
 
-      .row {
-         text-align: center;
-      }
-
-      .tengah {
-         margin: auto auto;
-      }
-
-      .form_horizontal {
-         text-align: center;
-      }
-
-      .form_horizontal .form_icon {
-         color: #fff;
-         font-size: 100px;
-         line-height: 85px;
-         margin: 0 0 13px;
-      }
-
-      .form_horizontal .title {
-         color: #fff;
-         font-size: 23px;
-         font-weight: 700px;
-         letter-spacing: 1px;
-         text-transform: uppercase;
-         margin: 0 0 35px 0;
-      }
-
-      .form_horizontal .form-group {
-         margin: 0 0 10px;
-         position: relative;
-      }
-
-      .form_horizontal .input-icon {
-         position: absolute;
-         left: 13px;
-         top: 55%;
-         transform: translateY(-50%);
-         font-size: 17px;
-         color: #777;
-      }
-
-      .form_horizontal .form-control {
-         color: #555;
-         background-color: #fff;
-         font-size: 15px;
-         font-family: Arial, Helvetica, sans-serif;
-         letter-spacing: 0.5px;
-         height: 37px;
-         padding: 2px 15px 2px 35px;
-         border: none;
-         border-radius: 50px;
-      }
-
-      .form_horizontal .form-control::placeholder {
-         color: rgba(0, 0, 0, 0.7);
-         font-size: 14px;
-         font-weight: bold;
-         color: grey;
-      }
-
-      .form_horizontal .btn {
-         color: #fff;
-         font-size: 15px;
-         background-color: #222;
-         font-weight: 600;
-         letter-spacing: 1px;
-         width: 100%;
-         padding: 10px 20px;
-         margin: 0 0 15px 0;
-         border: none;
-         border-radius: 20px;
-         text-transform: uppercase;
-      }
-
-      .form-group input {
-         font-size: 14px;
-         font-weight: bold;
-      }
-
-      .alert-atas {
-         position: absolute;
-         top: 10px;
-         right: 20px;
-      }
-   </style>
+      /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+      background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
+    }
+  </style>
 </head>
 
 <body>
-   <div class="form-bg">
-      <div class="container">
-         <div class="row">
-            <div class="tengah col-md-4 col-sm-6">
-               <form action="" method="POST" class="form_horizontal">
-                  <div class="form_icon"><i class="fa fa-user-circle"></i></div>
-                  <h3 class="title">SIDINI | Login</h3>
-                  <div class="form-group">
-                     <span class="input-icon"><i class="fa fa-user"></i></span>
-                     <input type="text" class="form-control" placeholder="NPSN.." name="username" autocomplete="off">
-                  </div>
-                  <div class="form-group">
-                     <span class="input-icon"><i class="fa fa-lock"></i></span>
-                     <input type="password" class="form-control" placeholder="Password.." name="password" autocomplete="off">
-                  </div>
-                  <input type="submit" class="btn signin" name="submit" value="MASUK">
-               </form>
-               <button type="button" style="background: none;border:none;" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Daftar</button>
+  <section class="vh-100 gradient-custom">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+          <div class="card shadow-2-strong" style="border-radius: 1rem;">
+            <div class="card-body p-5 text-center">
+              <img src="images/LOGO UNMUL.png" alt="" class="align-center" width="150px">
 
-               <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                  <div class="modal-dialog">
-                     <div class="modal-content">
-                        <div class="modal-header">
-                           <h5 class="modal-title" id="exampleModalLabel">Masukkan Kode Pendaftaran</h5>
-                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              <h3 class="mb-5">Login</h3>
+
+              <form action="" method="POST">
+                <div class="form-outline mb-4">
+                  <input type="username" id="typeEmailX-2" class="form-control form-control-lg" name="username" placeholder="username" required />
+                </div>
+
+                <div class="form-outline mb-4">
+                  <input type="password" id="typePasswordX-2" class="form-control form-control-lg" name="password" placeholder="password" required />
+                </div>
+
+                <div class="login">
+                  <button class="btn btn-success form-control btn-block" name="submit" type="submit">Masuk</button><br>
+                </div>
+                <!-- <button type="button" class="mt-3" style="background: none;border:none; color:grey;" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Buat akun</button> -->
+              </form>
+              <!-- tanggapan -->
+              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h6>Registrasi Mahasiswa</h6>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form method="POST">
+                      <div class="modal-body">
+                        <div class="mb-3">
+                          <input type="text" class="form-control mt-3" id="recipient-name" autocomplete="off" name="nim_baru" placeholder="NIM">
+                          <input type="text" class="form-control mt-3" id="recipient-name" autocomplete="off" name="nama_baru" placeholder="Nama Lengkap">
+                          <select name="jeniskelamin_baru" class="form-control mt-3" id="recipient-name" autocomplete="off" id="">
+                            <option>-- Jenis Kelamin --</option>
+                            <option value="laki-laki">Laki-laki</option>
+                            <option value="Perempuan">Perempuan</option>
+                          </select>
+                          <input type="text" class="form-control mt-3" id="recipient-name" autocomplete="off" name="fakultas_baru" placeholder="fakultas">
+                          <input type="text" class="form-control mt-3" id="recipient-name" autocomplete="off" name="prodi_baru" placeholder="prodi">
+                          <input type="text" class="form-control mt-3" id="recipient-name" autocomplete="off" name="kelas_baru" placeholder="Kelas">
+                          <input type="text" class="form-control mt-3" id="recipient-name" autocomplete="off" name="alamat_baru" placeholder="alamat">
+                          <input type="text" class="form-control mt-3" id="recipient-name" autocomplete="off" name="telp_baru" placeholder="telp">
+                          <input type="text" class="form-control mt-3" id="recipient-name" autocomplete="off" name="user_baru" placeholder="Username">
+                          <input type="text" class="form-control mt-3" id="recipient-name" autocomplete="off" name="pass_baru" placeholder="Password">
                         </div>
-                        <form method="POST">
-                           <div class="modal-body">
-                              <div class="mb-3">
-                                 <label for="recipient-name" class="col-form-label">Kode Pendaftaran:</label>
-                                 <input type="text" class="form-control" id="recipient-name" autocomplete="off" name="koderegistrasi">
-                              </div>
-                           </div>
-                           <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
-                              <input type="submit" class="btn btn-primary" name="masuk" value="Submit">
-                           </div>
-                        </form>
-                        <?php
-                        // include_once("db.php");
-                        if (isset($_POST["masuk"])) {
-                           $koderegistrasi = htmlentities(mysqli_real_escape_string($conn, $_POST['koderegistrasi']));
-
-                           $ambil = $conn->query("SELECT * FROM koderegistrasi WHERE koderegistrasi = '$koderegistrasi'");
-                           $akunyangcocok = $ambil->num_rows;
-                           if ($akunyangcocok == 1) {
-                              $akun = $ambil->fetch_assoc();
-                              $_SESSION["koderegistrasi"] = $akun;
-                              echo "<script>window.location = 'registrasi.php'</script>";
-                           } else {
-                           }
+                      </div>
+                      <div class="modal-footer">
+                        <input type="submit" class="btn btn-primary" name="regist" value="Daftar">
+                      </div>
+                    </form>
+                    <?php
+                    // include_once("db.php");
+                    if (isset($_POST["regist"])) {
+                      $nim_baru = $_POST['nim_baru'];
+                      $nama_baru = $_POST['nama_baru'];
+                      $jeniskelamin_baru = $_POST['jeniskelamin_baru'];
+                      $fakultas_baru = $_POST['fakultas_baru'];
+                      $prodi_baru = $_POST['prodi_baru'];
+                      $kelas_baru = $_POST['kelas_baru'];
+                      $alamat_baru = $_POST['alamat_baru'];
+                      $telp_baru = $_POST['telp_baru'];
+                      $user_baru = $_POST['user_baru'];
+                      $pass_baru = $_POST['pass_baru'];
+                      $cek_regist = mysqli_query($conn, "SELECT * FROM mahasiswa WHERE user_mahasiswa = '$user_baru'");
+                      if (mysqli_num_rows($cek_regist) == 0) {
+                        $get_regist = mysqli_query($conn, "INSERT INTO mahasiswa VALUE(
+                                null,
+                                '" . $nim_baru . "',
+                                '" . $nama_baru . "',
+                                '" . $user_baru . "',
+                                '" . $pass_baru . "',
+                                '" . $jeniskelamin_baru . "',
+                                '" . $kelas_baru . "',
+                                '" . $alamat_baru . "',
+                                '" . $fakultas_baru . "',
+                                '" . $prodi_baru . "',
+                                '" . $telp_baru . "'
+                            )");
+                        if ($get_regist) {
+                          echo '<script>alert("akun berhasil dibuat")</script>';
+                        } else {
+                          echo '<script>alert("akun gagal dibuat")</script>';
                         }
-                        ?>
-                     </div>
+                      } else {
+                        echo '<script>alert("Gagal, akun sudah terdaftar")</script>';
+                      }
+                    }
+                    ?>
                   </div>
-               </div>
+                </div>
+              </div>
+              <?php
+              if (isset($_POST["submit"])) {
+                $username = $_POST['username'];
+                $password = $_POST['password'];
+
+                if ($username != "" && $password != "") {
+                  $get_pegawai = mysqli_query($conn, "SELECT * FROM pegawai WHERE username = '$username' AND password = '$password'");
+                  $get_kadis = mysqli_query($conn, "SELECT * FROM kepala_dinas WHERE username = '$username' AND password = '$password'");
+                  $get_admin = mysqli_query($conn, "SELECT * FROM admin WHERE user_admin = '$username' AND pass_admin = '$password'");
+                  $akun_pegawai = mysqli_num_rows($get_pegawai);
+                  $akun_kadis = mysqli_num_rows($get_kadis);
+                  $akun_admin = mysqli_num_rows($get_admin);
+                  if ($akun_pegawai == 1) {
+                    $pegawai = $get_pegawai->fetch_assoc();
+                    $_SESSION["pegawai"] = $pegawai;
+                    echo "<script>location='pegawai/index.php';</script>";
+                  }
+                  else if ($akun_kadis == 1) {
+                    $kadis = $get_kadis->fetch_assoc();
+                    $_SESSION["kadis"] = $kadis;
+                    echo "<script>location='super_admin/index.php';</script>";
+                  } 
+                  else if ($akun_admin == 1) {
+                    $admin = $get_admin->fetch_assoc();
+                    $_SESSION["admin"] = $admin;
+                    echo "<script>location='admin/index.php';</script>";
+                  }
+                   else {
+              ?>
+
+                    <div class="alert alert-danger alert-dismissible alert-atas"><img src="icons/exclamation-circle-fill.svg" alt="" style="margin-bottom: 3px;"> tidak dapat login, username atau password salah
+                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+                    </div>
+
+              <?php
+                  }
+                }
+              }
+              ?>
             </div>
-         </div>
+          </div>
+        </div>
       </div>
-   </div>
-   <?php
-
-   if (isset($_POST["submit"])) {
-      $username = htmlentities(mysqli_real_escape_string($conn, $_POST['username']));
-      $password = htmlentities(mysqli_real_escape_string($conn, $_POST['password']));
-
-      if ($username != "" && $password != "") {
-         $ambil = $conn->query("SELECT * FROM user WHERE npsn = '$username' AND password = '$password'");
-         $ambiladmin = $conn->query("SELECT * FROM admin WHERE username = '$username' AND password = '$password'");
-         $akunyangcocok = $ambil->num_rows;
-         $akunyangcocok2 = $ambiladmin->num_rows;
-         if ($akunyangcocok == 1) {
-            $akun = $ambil->fetch_assoc();
-            $_SESSION["user"] = $akun;
-            echo "<script>location='dashboard.php';</script>";
-         } elseif ($akunyangcocok2 == 1) {
-            $akun1 = $ambiladmin->fetch_assoc();
-            $_SESSION["admin"] = $akun1;
-            echo "<script>location='admin/index.php';</script>";
-         } else {
-   ?>
-
-            <div class="alert alert-danger alert-dismissible alert-atas"><img src="icons/exclamation-circle-fill.svg" alt="" style="margin-bottom: 3px;"> tidak dapat login, Email atau password salah
-               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
-            </div>
-
-   <?php
-         }
-      }
-   }
-   ?>
-   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-   <script src="js/scripts.js"></script>
-   <script src="assets/demo/chart-area-demo.js"></script>
-   <script src="assets/demo/chart-bar-demo.js"></script>
-   <script src="datatables/datatable.js"></script>
-   <script src="js/datatables-simple-demo.js"></script>
-   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    </div>
+  </section>
+  <script src="bootstrap/js/bootstrap.min.js"></script>
 </body>
 
 </html>

@@ -1,13 +1,14 @@
 <?php
 session_start();
 include("../database/db.php");
-if (!isset($_SESSION["admin"])) {
+if (!isset($_SESSION["kadis"])) {
    echo "<script>location='../index.php'</script>";
 }
-?>
 
+?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
    <meta charset="utf-8" />
    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -58,20 +59,27 @@ if (!isset($_SESSION["admin"])) {
       .tooltips button {
          padding: 0 0 0 0;
          margin: 0;
+         /* display: none; */
       }
    </style>
 </head>
 
 <body class="sb-nav-fixed">
    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-   <a class="navbar-brand ps-3" href="index.php"> CUTI | ADMIN</a>
+
+
+      <a class="navbar-brand ps-3" href="index.php"> CUTI | KADIS</a>
+      <!-- Navbar Brand-->
+      <!-- Sidebar Toggle-->
       <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!">
          <i class="fas fa-bars"></i>
       </button>
+
       <!-- navbar nama -->
       <div class="navbar-nav ps-3 d-md-inline-block form-inline ms-auto" style="color: white; text-decoration: none">
-         <p><?php echo "<p>" . $_SESSION['admin']['nama'] . "</p>" ?></p>
+         <p><?php echo "<p>" . $_SESSION['kadis']['nama'] . "</p>" ?></p>
       </div>
+
       <!-- navbar icon  -->
       <ul class="navbar-nav me-0 me-md-3 my-2 my-md-0">
          <li class="nav-item dropdown">
@@ -81,7 +89,8 @@ if (!isset($_SESSION["admin"])) {
                <li>
                   <hr class="dropdown-divider" />
                </li>
-               <li><a href="logout.php" class="dropdown-item">logout</a></li> 
+               <li><a href="logout.php" class="dropdown-item">logout</a></li>
+
             </ul>
          </li>
       </ul>
@@ -91,13 +100,20 @@ if (!isset($_SESSION["admin"])) {
          <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
             <div class="sb-sidenav-menu">
                <div class="nav">
-                  <div class="sb-sidenav-menu-heading">Admin</div>
+                  <div class="sb-sidenav-menu-heading">Super Admin</div>
                   <a class="nav-link aktif" href="index.php">
                      <div class="sb-nav-link-icon">
                         <i class="fas fa-home"></i>
                      </div>
                      Dashboard
                   </a>
+                  <a class="nav-link" href="admin.php">
+                     <div class="sb-nav-link-icon">
+                        <i class="fas fa-address-book"></i>
+                     </div>
+                     Admin
+                  </a>
+
                   <a class="nav-link" href="pegawai.php">
                      <div class="sb-nav-link-icon">
                         <i class="fas fa-address-book"></i>
@@ -120,7 +136,7 @@ if (!isset($_SESSION["admin"])) {
             </div>
             <div class="sb-sidenav-footer">
                <div class="small">masuk sebagai:</div>
-               <h6>Admin</h6>
+               <h6>Super Admin</h6>
             </div>
          </nav>
       </div>
