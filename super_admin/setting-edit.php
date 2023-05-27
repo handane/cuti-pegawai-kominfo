@@ -15,7 +15,7 @@ if (!isset($_SESSION["kadis"])) {
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <meta name="description" content="" />
   <meta name="author" content="" />
-  <title>CUTI | KADIS</title>
+  <title>CUTI | Kadis</title>
   <link rel="icon" type="image/png" href="">
   <!-- endinject -->
   <link rel="shortcut icon" href="../../images/LOGO UNMUL.png" />
@@ -25,6 +25,11 @@ if (!isset($_SESSION["kadis"])) {
   <style>
     #ftz16 {
       font-size: 16px;
+    }
+
+    table tr th,
+    td {
+      padding: 5px 8px;
     }
 
     body {
@@ -83,7 +88,7 @@ if (!isset($_SESSION["kadis"])) {
               Admin
             </a>
 
-            <a class="nav-link aktif" href="pegawai.php">
+            <a class="nav-link" href="pegawai.php">
               <div class="sb-nav-link-icon">
                 <i class="fas fa-address-book"></i>
               </div>
@@ -95,7 +100,7 @@ if (!isset($_SESSION["kadis"])) {
               </div>
               Cuti
             </a>
-            <a class="nav-link" href="setting.php">
+            <a class="nav-link aktif" href="setting.php">
               <div class="sb-nav-link-icon">
                 <i class="fas fa-gear"></i>
               </div>
@@ -113,39 +118,71 @@ if (!isset($_SESSION["kadis"])) {
       <main>
         <div class="container-fluid px-3">
           <ol class="breadcrumb mb-4 mt-2">
-            <li class="breadcrumb-item active">Data Pegawai</li>
+            <li class="breadcrumb-item active">Profil</li>
           </ol>
-
           <div class="card">
             <div class="card-body">
-              <table id="datatablesSimple">
-                <thead>
-                  <tr style="font-size: 16px;">
-                    <th>No</th>
-                    <th>NIP</th>
-                    <th>Nama</th>
-                    <th>Username</th>
-                    <th>No Telpon</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php
-                  $no = 1;
-                  $get_pegawai = mysqli_query($conn, "SELECT * FROM pegawai");
-                  while ($p = mysqli_fetch_array($get_pegawai)) {
-                  ?>
-                    <tr style="font-size: 16px;" id="klik-tabel">
-                      <td><?php echo $no++; ?></td>
-                      <td><?php echo $p['nip']; ?></td>
-                      <td><?php echo $p['nama']; ?></td>
-                      <td><?php echo $p['username']; ?></td>
-                      <td><?php echo $p['telp']; ?></td>
-                    </tr>
-                  <?php } ?>
-                </tbody>
-              </table>
+              <?php
+              $id_kpldinas = $_GET['id_kpldinas'];
+              $edit = mysqli_query($conn, "SELECT * FROM kepala_dinas WHERE id_kpldinas = '$id_kpldinas'");
+              if (mysqli_num_rows($edit) > 0) {
+                while ($row = mysqli_fetch_array($edit)) {
+              ?>
+
+                  <form class="row g-3" method="POST" enctype="multipart/form-data">
+                    <div class="col-md-6">
+                      <label for="" class="form-label-md"><b>Nama</b></label>
+                      <input type="text" class="form-control" name="nama" value="<?php echo $row['nama'] ?>" />
+                    </div>
+                    <div class="col-md-6">
+                      <label for="" class="form-label-md"><b>NIP</b></label>
+                      <input type="text" class="form-control" name="nip" value="<?php echo $row['nip'] ?>" />
+                    </div>
+                    <div class="col-md-6">
+                      <label for="" class="form-label-md"><b>Username</b></label>
+                      <input type="text" class="form-control" name="username" value="<?php echo $row['username'] ?>" readonly />
+                    </div>
+                    <div class="col-md-6">
+                      <label for="" class="form-label-md"><b>Password</b></label>
+                      <input type="text" class="form-control" name="password" value="<?php echo $row['password'] ?>" readonly />
+                    </div>
+                    <div class="col-md-12">
+                      <input type="submit" class="btn btn-success" name="submit" value="Save" />
+                    </div>
+                  </form>
+              <?php }
+              } ?>
+
+              <?php
+              if (isset($_POST['submit'])) {
+                $nama = $_POST['nama'];
+                $nip = $_POST['nip'];
+                $username = $_POST['username'];
+                $password = $_POST['password'];
+
+                $update = mysqli_query($conn, "UPDATE kepala_dinas SET 
+                nip = '$nip',
+                nama = '$nama',
+                username = '$username',
+                password = '$password'
+                WHERE id_kpldinas = '$id_kpldinas'");
+                if ($update) {
+              ?>
+              <?php
+                  echo
+                  '<script>
+                  window.location="setting.php";
+                  alert("data berhasil di update");
+                  </script>';
+                } else {
+                  echo 'gagal ' . mysqli_error($conn);
+                }
+              }
+              ?>
+
             </div>
           </div>
+        </div>
       </main>
       <footer class="mt-5">
       </footer>

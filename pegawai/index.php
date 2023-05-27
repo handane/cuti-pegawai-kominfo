@@ -8,6 +8,7 @@ if (!isset($_SESSION["pegawai"])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
    <meta charset="utf-8" />
    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -64,7 +65,7 @@ if (!isset($_SESSION["pegawai"])) {
 
 <body class="sb-nav-fixed">
    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-   <a class="navbar-brand ps-3" href="index.php"> CUTI | PEGAWAI</a>
+      <a class="navbar-brand ps-3" href="index.php"> CUTI | PEGAWAI</a>
       <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!">
          <i class="fas fa-bars"></i>
       </button>
@@ -77,11 +78,11 @@ if (!isset($_SESSION["pegawai"])) {
          <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-               <li><a class="dropdown-item" href="index.php">Profil</a></li>
+               <li><a class="dropdown-item" href="setting.php">Profil</a></li>
                <li>
                   <hr class="dropdown-divider" />
                </li>
-               <li><a href="logout.php" class="dropdown-item">logout</a></li> 
+               <li><a href="logout.php" class="dropdown-item">logout</a></li>
             </ul>
          </li>
       </ul>
@@ -205,7 +206,7 @@ if (!isset($_SESSION["pegawai"])) {
                         </div>
                      </div>
                   </section>
-               </div>   
+               </div>
          </main>
          <footer class="mt-5">
          </footer>

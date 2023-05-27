@@ -15,7 +15,7 @@ if (!isset($_SESSION["admin"])) {
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <meta name="description" content="" />
   <meta name="author" content="" />
-  <title>CUTI | ADMIN</title>
+  <title>CUTI | Admin</title>
   <link rel="icon" type="image/png" href="">
   <!-- endinject -->
   <link rel="shortcut icon" href="../../images/LOGO UNMUL.png" />
@@ -59,7 +59,6 @@ if (!isset($_SESSION["admin"])) {
             <hr class="dropdown-divider" />
           </li>
           <li><a href="logout.php" class="dropdown-item">logout</a></li>
-
         </ul>
       </li>
     </ul>
@@ -76,7 +75,7 @@ if (!isset($_SESSION["admin"])) {
               </div>
               Dashboard
             </a>
-            <a class="nav-link aktif" href="pegawai.php">
+            <a class="nav-link" href="pegawai.php">
               <div class="sb-nav-link-icon">
                 <i class="fas fa-address-book"></i>
               </div>
@@ -88,7 +87,7 @@ if (!isset($_SESSION["admin"])) {
               </div>
               Cuti
             </a>
-            <a class="nav-link" href="setting.php">
+            <a class="nav-link aktif" href="setting.php">
               <div class="sb-nav-link-icon">
                 <i class="fas fa-gear"></i>
               </div>
@@ -106,56 +105,72 @@ if (!isset($_SESSION["admin"])) {
       <main>
         <div class="container-fluid px-3">
           <ol class="breadcrumb mb-4 mt-2">
-            <li class="breadcrumb-item active">Update Data Pegawai</li>
+            <li class="breadcrumb-item active">Profil</li>
           </ol>
           <div class="card">
             <div class="card-body">
               <?php
-              if (isset($_GET['id_pegawai'])) {
-                $id_pegawai = $_GET['id_pegawai'];
-                $edit = mysqli_query($conn, "SELECT * FROM pegawai WHERE id_pegawai = '$id_pegawai'");
-                if (mysqli_num_rows($edit) > 0) {
-                  while ($row = mysqli_fetch_array($edit)) {
+              $id_admin = $_GET['id_admin'];
+              $edit = mysqli_query($conn, "SELECT * FROM admin WHERE id_admin = '$id_admin'");
+              if (mysqli_num_rows($edit) > 0) {
+                while ($row = mysqli_fetch_array($edit)) {
               ?>
 
-                    <form class="row g-3" method="POST" enctype="multipart/form-data">
-                      <div class="col-md-6">
-                        <label for="" class="form-label-md"><b>Nama</b></label>
-                        <input type="text" class="form-control" name="nama" value="<?php echo $row['nama'] ?>" />
-                      </div>
-                      <div class="col-md-6">
-                        <label for="" class="form-label-md"><b>NIP</b></label>
-                        <input type="text" class="form-control" name="nip" value="<?php echo $row['nip'] ?>" />
-                      </div>
-                      <div class="col-md-6">
-                        <label for="" class="form-label-md"><b>No Telepon</b></label>
-                        <input type="text" class="form-control" name="telp" value="<?php echo $row['telp'] ?>" />
-                      </div>
-                      <div class="col-md-12">
-                        <input type="submit" class="btn btn-success" name="submit" value="Save" />
-                      </div>
-                    </form>
+                  <form class="row g-3" method="POST" enctype="multipart/form-data">
+                    <div class="col-md-6">
+                      <label for="" class="form-label-md"><b>Nama</b></label>
+                      <input type="text" class="form-control" name="nama" value="<?php echo $row['nama'] ?>" />
+                    </div>
+                    <div class="col-md-6">
+                      <label for="" class="form-label-md"><b>NIP</b></label>
+                      <input type="text" class="form-control" name="nip" value="<?php echo $row['nip'] ?>" />
+                    </div>
+                    <div class="col-md-6">
+                      <label for="" class="form-label-md"><b>Jenis Kelamin</b></label>
+                      <input type="text" class="form-control" name="jenis_kelamin" value="<?php echo $row['jenis_kelamin'] ?>" />
+                    </div>
+                    <div class="col-md-6">
+                      <label for="" class="form-label-md"><b>No Telepon</b></label>
+                      <input type="text" class="form-control" name="telp" value="<?php echo $row['telp_admin'] ?>" />
+                    </div>
+                    <div class="col-md-6">
+                      <label for="" class="form-label-md"><b>Username</b></label>
+                      <input type="text" class="form-control" name="username" value="<?php echo $row['user_admin'] ?>" readonly />
+                    </div>
+                    <div class="col-md-6">
+                      <label for="" class="form-label-md"><b>Password</b></label>
+                      <input type="text" class="form-control" name="password" value="<?php echo $row['pass_admin'] ?>" readonly />
+                    </div>
+                    <div class="col-md-12">
+                      <input type="submit" class="btn btn-success" name="submit" value="Save" />
+                    </div>
+                  </form>
               <?php }
-                }
               } ?>
 
               <?php
               if (isset($_POST['submit'])) {
                 $nama = $_POST['nama'];
                 $nip = $_POST['nip'];
+                $jenis_kelamin = $_POST['jenis_kelamin'];
                 $telp = $_POST['telp'];
+                $username = $_POST['username'];
+                $password = $_POST['password'];
 
-                $update = mysqli_query($conn, "UPDATE pegawai SET
-                           nip = '$nip',
-                           nama = '$nama',
-                           telp = '$telp' 
-                           WHERE id_pegawai = '$id_pegawai'");
+                $update = mysqli_query($conn, "UPDATE admin SET 
+                nip = '$nip',
+                nama = '$nama',
+                jenis_kelamin = '$jenis_kelamin',
+                telp_admin = '$telp',
+                user_admin = '$username',
+                pass_admin = '$password'
+                WHERE id_admin = '$id_admin'");
                 if ($update) {
               ?>
               <?php
                   echo
                   '<script>
-                  window.location="pegawai.php";
+                  window.location="setting.php";
                   alert("data berhasil di update");
                   </script>';
                 } else {

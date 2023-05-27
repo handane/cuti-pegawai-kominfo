@@ -54,7 +54,7 @@ if (!isset($_SESSION["pegawai"])) {
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item" href="index.php">Profil</a></li>
+          <li><a class="dropdown-item" href="setting.php">Profil</a></li>
           <li>
             <hr class="dropdown-divider" />
           </li>
@@ -167,34 +167,46 @@ if (!isset($_SESSION["pegawai"])) {
                 $alasan_cuti = $_POST['alasan_cuti'];
                 $status_cuti = "Menunggu Persetujuan";
 
-                $update = mysqli_query($conn, "INSERT INTO pengajuan VALUE(
-                           null,
-                           '".$id_jeniscuti. "',
-                           '" . $id_pegawai . "',
-                           '" . $tgl_pengajuan . "',
-                           '" . $tgl_cuti . "',
-                           '" . $tgl_berakhir . "',
-                           '" . $alasan_cuti . "',
-                           '" . $status_cuti . "')");
-
                 $cek_jumlah = mysqli_query($conn, "SELECT * FROM pegawai WHERE id_pegawai = '$id_pegawai'");
                 $cek_jumlah_2 = mysqli_fetch_array($cek_jumlah);
-                $jumlah_cuti = $cek_jumlah_2['jumlah_cuti'] - 1;
-                $update2 = mysqli_query($conn, "UPDATE pegawai SET 
-                  jumlah_cuti = '$jumlah_cuti'
-                  WHERE id_pegawai = '$id_pegawai'
-                ");
-                
-                if ($update AND $update2) {
+                $waktu_awal = date_create($tgl_cuti);
+                $waktu_akhir = date_create($tgl_berakhir);
+                $diff = date_diff($waktu_awal, $waktu_akhir);
+                $diff_d = $diff->d;
+                $jumlah_cuti = $cek_jumlah_2['jumlah_cuti'] - $diff_d;
+
+                if ($cek_jumlah_2['jumlah_cuti'] != 0) {
+                  if ($cek_jumlah_2['jumlah_cuti'] >= $diff_d) {
+                    $update2 = mysqli_query($conn, "UPDATE pegawai SET 
+                      jumlah_cuti = '$jumlah_cuti'
+                      WHERE id_pegawai = '$id_pegawai'
+                    ");
+
+                    $update = mysqli_query($conn, "INSERT INTO pengajuan VALUE(
+                              null,
+                              '" . $id_jeniscuti . "',
+                              '" . $id_pegawai . "',
+                              '" . $tgl_pengajuan . "',
+                              '" . $tgl_cuti . "',
+                              '" . $tgl_berakhir . "',
+                              '" . $alasan_cuti . "',
+                              '" . $status_cuti . "')");
+                    if ($update and $update2) {
               ?>
               <?php
-                  echo
-                  '<script>
-                  window.location="cuti.php";
-                  alert("cuti berhasil diajukan");
-                  </script>';
+                      echo
+                      '<script>
+                      window.location="cuti.php";
+                      alert("cuti berhasil diajukan");
+                      </script>';
+                    } else {
+                      echo 'gagal ' . mysqli_error($conn);
+                    }
+                  } else {
+                    echo "<script>alert('jumlah cuti yang diambil terlalu banyak')</script>";
+                  }
                 } else {
-                  echo 'gagal ' . mysqli_error($conn);
+                  echo "<script>alert('tidak ada cuti tersedia')</script>";
                 }
               }
               ?>

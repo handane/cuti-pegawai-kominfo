@@ -33,10 +33,8 @@ session_start();
         <div class="col-12 col-md-8 col-lg-6 col-xl-5">
           <div class="card shadow-2-strong" style="border-radius: 1rem;">
             <div class="card-body p-5 text-center">
-              <img src="images/LOGO UNMUL.png" alt="" class="align-center" width="150px">
-
+              <!-- <img src="" alt="" class="align-center mb-4" width="150px"> -->
               <h3 class="mb-5">Login</h3>
-
               <form action="" method="POST">
                 <div class="form-outline mb-4">
                   <input type="username" id="typeEmailX-2" class="form-control form-control-lg" name="username" placeholder="username" required />

@@ -54,7 +54,7 @@ if (!isset($_SESSION["admin"])) {
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item" href="index.php">Profil</a></li>
+          <li><a class="dropdown-item" href="setting.php">Profil</a></li>
           <li>
             <hr class="dropdown-divider" />
           </li>
@@ -127,7 +127,7 @@ if (!isset($_SESSION["admin"])) {
                 <tbody>
                   <?php
                   $no = 1;
-                  $get_pegawai = mysqli_query($conn, "SELECT * FROM pengajuan LEFT JOIN pegawai USING (id_pegawai) LEFT JOIN jenis_cuti USING (id_jeniscuti)");
+                  $get_pegawai = mysqli_query($conn, "SELECT * FROM pengajuan LEFT JOIN pegawai USING (id_pegawai) LEFT JOIN jenis_cuti USING (id_jeniscuti) ORDER BY id_pengajuan DESC");
                   while ($p = mysqli_fetch_array($get_pegawai)) {
                   ?>
                     <tr style="font-size: 14px;" id="klik-tabel">
@@ -146,11 +146,11 @@ if (!isset($_SESSION["admin"])) {
                         <?php
                         } else if ($p['status_cuti'] == 'ditolak') {
                         ?>
-                          <b style="color: red;">Ditolak</b>
+                          <div class="btn btn-sm btn-danger">Ditolak</div>
                         <?php
                         } else {
                         ?>
-                          <b style="color: green;">Disetujui</b>
+                          <div class="btn btn-sm btn-success">Disetujui</div>
                         <?php
                         }
                         ?>
@@ -159,14 +159,13 @@ if (!isset($_SESSION["admin"])) {
                         <?php
                         if ($p['status_cuti'] == 'Disetujui') {
                         ?>
-                          <a href="cetak.php" class="btn btn-sm btn-warning m-1">Cetak</a>
+                          <a href="cetak.php?id_pengajuan=<?php echo $p['id_pengajuan'] ?>" class="btn btn-sm btn-warning m-1">Cetak</a>
                         <?php
                         } else if ($p['status_cuti'] == 'ditolak') {
                           echo "-";
                         } else {
                         ?>
-                          <a href="cuti-persetujuan.php?id_pengajuan=<?php echo $p['id_pengajuan'] ?>" onclick="return confirm('apakah anda yakin ingin menyetujui cuti <?php echo $p['nama'] ?>')" class="btn btn-sm btn-success">Setujui</a>
-                          <a class="btn btn-sm btn-danger" onclick="return confirm('apakah anda yakin ingin menolak cuti <?php echo $p['nama'] ?>')" href="permohonan-delete.php?id_pengajuan=<?php echo $p['id_pengajuan'] ?>&id_pegawai=<?php echo $p['id_pegawai'] ?>">Tolak</a>
+                          <div class="">-</div>
                         <?php
                         }
                         ?>

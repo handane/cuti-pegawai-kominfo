@@ -1,7 +1,4 @@
 <?php
-
-use Mpdf\Tag\B;
-
 session_start();
 include("../database/db.php");
 if (!isset($_SESSION["pegawai"])) {
@@ -79,7 +76,7 @@ if (!isset($_SESSION["pegawai"])) {
               </div>
               Dashboard
             </a>
-            <a class="nav-link aktif" href="cuti.php">
+            <a class="nav-link" href="cuti.php">
               <div class="sb-nav-link-icon">
                 <i class="fas fa-address-book"></i>
               </div>
@@ -91,7 +88,7 @@ if (!isset($_SESSION["pegawai"])) {
               </div>
               Permohonan Cuti
             </a>
-            <a class="nav-link" href="setting.php">
+            <a class="nav-link aktif" href="setting.php">
               <div class="sb-nav-link-icon">
                 <i class="fas fa-gear"></i>
               </div>
@@ -109,79 +106,77 @@ if (!isset($_SESSION["pegawai"])) {
       <main>
         <div class="container-fluid px-3">
           <ol class="breadcrumb mb-4 mt-2">
-            <li class="breadcrumb-item active">Data Cuti Pegawai</li>
+            <li class="breadcrumb-item active">Profil</li>
           </ol>
           <div class="card">
             <div class="card-body">
-              <table id="datatablesSimple">
-                <thead>
-                  <tr style="font-size: 16px;">
-                    <th>No</th>
-                    <th>Nama</th>
-                    <th>Jenis Cuti</th>
-                    <th>Alasan</th>
-                    <th>Tgl diajukan</th>
-                    <th>Mulai</th>
-                    <th>Berakhir</th>
-                    <th>status</th>
-                    <th>aksi</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php
-                  $no = 1;
-                  $id_pegawai = $_SESSION['pegawai']['id_pegawai'];
-                  $get_pegawai = mysqli_query($conn, "SELECT * FROM pengajuan LEFT JOIN pegawai USING (id_pegawai) LEFT JOIN jenis_cuti USING (id_jeniscuti) WHERE id_pegawai = '$id_pegawai' ORDER BY id_pengajuan DESC");
-                  while ($p = mysqli_fetch_array($get_pegawai)) {
-                  ?>
-                    <tr style="font-size: 16px;" id="klik-tabel">
-                      <td><?php echo $no++; ?></td>
-                      <td><?php echo $p['nama']; ?></td>
-                      <td><?php echo $p['jenis_cuti']; ?></td>
-                      <td><?php echo $p['alasan_cuti']; ?></td>
-                      <td><?php echo $p['tgl_pengajuan']; ?></td>
-                      <td><?php echo $p['tgl_cuti']; ?></td>
-                      <td><?php echo $p['tgl_berakhir']; ?></td>
-                      <td>
-                        <?php
-                        if ($p['status_cuti'] == 'Menunggu Persetujuan') {
-                        ?>
-                          <h6 class="btn btn-sm btn-secondary">Menunggu Persetujuan</h6>
-                        <?php
-                        } else if ($p['status_cuti'] == 'ditolak') {
-                        ?>
-                          <b style="color:red;">Ditolak</b>
-                        <?php
-                        } else {
-                        ?>
-                          <b style="color:green;">Disetujui</b>
-                        <?php
-                        }
-                        ?>
-                      </td>
-                      <td>
-                        <?php
-                        if ($p['status_cuti'] == 'Menunggu Persetujuan') {
-                        ?>
-                          <a class="btn btn-sm btn-danger" onclick="return confirm('apakah anda yakin ingin membatalkan permohonan cuti')" href="permohonan-delete.php?id_pengajuan=<?php echo $p['id_pengajuan'] ?>&id_pegawai=<?php echo $p['id_pegawai'] ?>">batalkan</a>
-                        <?php
-                        } else if ($p['status_cuti'] == 'ditolak') {
-                        ?>
-                          <h6>-</h6>
-                        <?php
-                        } else {
-                        ?>
-                          <a href="cetak.php?id_pengajuan=<?php echo $p['id_pengajuan'] ?>" class="btn btn-sm btn-warning">Cetak</a>
-                        <?php
-                        }
-                        ?>
-                      </td>
-                    </tr>
-                  <?php } ?>
-                </tbody>
-              </table>
+              <?php
+              $id_pegawai = $_GET['id_pegawai'];
+              $edit = mysqli_query($conn, "SELECT * FROM pegawai WHERE id_pegawai = '$id_pegawai'");
+              if (mysqli_num_rows($edit) > 0) {
+                while ($row = mysqli_fetch_array($edit)) {
+              ?>
+
+                  <form class="row g-3" method="POST" enctype="multipart/form-data">
+                    <div class="col-md-6">
+                      <label for="" class="form-label-md"><b>Nama</b></label>
+                      <input type="text" class="form-control" name="nama" value="<?php echo $row['nama'] ?>" />
+                    </div>
+                    <div class="col-md-6">
+                      <label for="" class="form-label-md"><b>NIP</b></label>
+                      <input type="text" class="form-control" name="nip" value="<?php echo $row['nip'] ?>" />
+                    </div>
+                    <div class="col-md-6">
+                      <label for="" class="form-label-md"><b>No Telpon</b></label>
+                      <input type="text" class="form-control" name="telp" value="<?php echo $row['telp'] ?>" />
+                    </div>
+                    <div class="col-md-6">
+                      <label for="" class="form-label-md"><b>Username</b></label>
+                      <input type="text" class="form-control" name="username" value="<?php echo $row['username'] ?>" readonly />
+                    </div>
+                    <div class="col-md-6">
+                      <label for="" class="form-label-md"><b>Password</b></label>
+                      <input type="text" class="form-control" name="password" value="<?php echo $row['password'] ?>" readonly />
+                    </div>
+                    <div class="col-md-12">
+                      <input type="submit" class="btn btn-success" name="submit" value="Save" />
+                    </div>
+                  </form>
+              <?php }
+              } ?>
+
+              <?php
+              if (isset($_POST['submit'])) {
+                $nama = $_POST['nama'];
+                $nip = $_POST['nip'];
+                $telp = $_POST['telp'];
+                $username = $_POST['username'];
+                $password = $_POST['password'];
+
+                $update = mysqli_query($conn, "UPDATE pegawai SET 
+                nip = '$nip',
+                nama = '$nama',
+                telp = '$telp',
+                username = '$username',
+                password = '$password'
+                WHERE id_pegawai = '$id_pegawai'");
+                if ($update) {
+              ?>
+              <?php
+                  echo
+                  '<script>
+                  window.location="setting.php";
+                  alert("data berhasil di update");
+                  </script>';
+                } else {
+                  echo 'gagal ' . mysqli_error($conn);
+                }
+              }
+              ?>
+
             </div>
           </div>
+        </div>
       </main>
       <footer class="mt-5">
       </footer>

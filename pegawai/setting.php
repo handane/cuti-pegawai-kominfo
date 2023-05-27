@@ -1,7 +1,4 @@
 <?php
-
-use Mpdf\Tag\B;
-
 session_start();
 include("../database/db.php");
 if (!isset($_SESSION["pegawai"])) {
@@ -28,6 +25,11 @@ if (!isset($_SESSION["pegawai"])) {
   <style>
     #ftz16 {
       font-size: 16px;
+    }
+
+    table tr th,
+    td {
+      padding: 5px 8px;
     }
 
     body {
@@ -79,7 +81,7 @@ if (!isset($_SESSION["pegawai"])) {
               </div>
               Dashboard
             </a>
-            <a class="nav-link aktif" href="cuti.php">
+            <a class="nav-link" href="cuti.php">
               <div class="sb-nav-link-icon">
                 <i class="fas fa-address-book"></i>
               </div>
@@ -91,7 +93,7 @@ if (!isset($_SESSION["pegawai"])) {
               </div>
               Permohonan Cuti
             </a>
-            <a class="nav-link" href="setting.php">
+            <a class="nav-link aktif" href="setting.php">
               <div class="sb-nav-link-icon">
                 <i class="fas fa-gear"></i>
               </div>
@@ -109,79 +111,50 @@ if (!isset($_SESSION["pegawai"])) {
       <main>
         <div class="container-fluid px-3">
           <ol class="breadcrumb mb-4 mt-2">
-            <li class="breadcrumb-item active">Data Cuti Pegawai</li>
+            <li class="breadcrumb-item active">Profil</li>
           </ol>
           <div class="card">
             <div class="card-body">
-              <table id="datatablesSimple">
-                <thead>
-                  <tr style="font-size: 16px;">
-                    <th>No</th>
-                    <th>Nama</th>
-                    <th>Jenis Cuti</th>
-                    <th>Alasan</th>
-                    <th>Tgl diajukan</th>
-                    <th>Mulai</th>
-                    <th>Berakhir</th>
-                    <th>status</th>
-                    <th>aksi</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php
-                  $no = 1;
-                  $id_pegawai = $_SESSION['pegawai']['id_pegawai'];
-                  $get_pegawai = mysqli_query($conn, "SELECT * FROM pengajuan LEFT JOIN pegawai USING (id_pegawai) LEFT JOIN jenis_cuti USING (id_jeniscuti) WHERE id_pegawai = '$id_pegawai' ORDER BY id_pengajuan DESC");
-                  while ($p = mysqli_fetch_array($get_pegawai)) {
-                  ?>
-                    <tr style="font-size: 16px;" id="klik-tabel">
-                      <td><?php echo $no++; ?></td>
-                      <td><?php echo $p['nama']; ?></td>
-                      <td><?php echo $p['jenis_cuti']; ?></td>
-                      <td><?php echo $p['alasan_cuti']; ?></td>
-                      <td><?php echo $p['tgl_pengajuan']; ?></td>
-                      <td><?php echo $p['tgl_cuti']; ?></td>
-                      <td><?php echo $p['tgl_berakhir']; ?></td>
-                      <td>
-                        <?php
-                        if ($p['status_cuti'] == 'Menunggu Persetujuan') {
-                        ?>
-                          <h6 class="btn btn-sm btn-secondary">Menunggu Persetujuan</h6>
-                        <?php
-                        } else if ($p['status_cuti'] == 'ditolak') {
-                        ?>
-                          <b style="color:red;">Ditolak</b>
-                        <?php
-                        } else {
-                        ?>
-                          <b style="color:green;">Disetujui</b>
-                        <?php
-                        }
-                        ?>
-                      </td>
-                      <td>
-                        <?php
-                        if ($p['status_cuti'] == 'Menunggu Persetujuan') {
-                        ?>
-                          <a class="btn btn-sm btn-danger" onclick="return confirm('apakah anda yakin ingin membatalkan permohonan cuti')" href="permohonan-delete.php?id_pengajuan=<?php echo $p['id_pengajuan'] ?>&id_pegawai=<?php echo $p['id_pegawai'] ?>">batalkan</a>
-                        <?php
-                        } else if ($p['status_cuti'] == 'ditolak') {
-                        ?>
-                          <h6>-</h6>
-                        <?php
-                        } else {
-                        ?>
-                          <a href="cetak.php?id_pengajuan=<?php echo $p['id_pengajuan'] ?>" class="btn btn-sm btn-warning">Cetak</a>
-                        <?php
-                        }
-                        ?>
-                      </td>
+              <?php
+              $id_pegawai = $_SESSION['pegawai']['id_pegawai'];
+              $profil = mysqli_query($conn, "SELECT * FROM pegawai WHERE id_pegawai = '$id_pegawai'");
+              $row = mysqli_fetch_array($profil);
+              ?>
+              <a href="setting-edit.php?id_pegawai=<?php echo $row['id_pegawai'] ?>" class="btn btn-sm btn-success">Edit</a>
+              <div class="table-responsive">
+                <table class="m-3 p-3">
+                  <thead>
+                    <tr>
+                      <th>Nama</th>
+                      <td>:</td>
+                      <td><?php echo $row['nama'] ?></td>
                     </tr>
-                  <?php } ?>
-                </tbody>
-              </table>
+                    <tr>
+                      <th>NIP</th>
+                      <td>:</td>
+                      <td><?php echo $row['nip'] ?></td>
+                    </tr>
+                    <tr>
+                      <th>No Telepon</th>
+                      <td>:</td>
+                      <td><?php echo $row['telp'] ?></td>
+                    </tr>
+                    <tr>
+                      <th>Username</th>
+                      <td>:</td>
+                      <td><?php echo $row['username'] ?></td>
+                    </tr>
+                    <tr>
+                      <th>Password</th>
+                      <td>:</td>
+                      <td><?php echo $row['password'] ?></td>
+                    </tr>
+                  </thead>
+                </table>
+              </div>
             </div>
           </div>
+        </div>
       </main>
       <footer class="mt-5">
       </footer>

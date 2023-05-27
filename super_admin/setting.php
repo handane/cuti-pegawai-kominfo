@@ -15,7 +15,7 @@ if (!isset($_SESSION["kadis"])) {
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <meta name="description" content="" />
   <meta name="author" content="" />
-  <title>CUTI | KADIS</title>
+  <title>CUTI | Kadis</title>
   <link rel="icon" type="image/png" href="">
   <!-- endinject -->
   <link rel="shortcut icon" href="../../images/LOGO UNMUL.png" />
@@ -25,6 +25,11 @@ if (!isset($_SESSION["kadis"])) {
   <style>
     #ftz16 {
       font-size: 16px;
+    }
+
+    table tr th,
+    td {
+      padding: 5px 8px;
     }
 
     body {
@@ -83,7 +88,7 @@ if (!isset($_SESSION["kadis"])) {
               Admin
             </a>
 
-            <a class="nav-link aktif" href="pegawai.php">
+            <a class="nav-link" href="pegawai.php">
               <div class="sb-nav-link-icon">
                 <i class="fas fa-address-book"></i>
               </div>
@@ -95,7 +100,7 @@ if (!isset($_SESSION["kadis"])) {
               </div>
               Cuti
             </a>
-            <a class="nav-link" href="setting.php">
+            <a class="nav-link aktif" href="setting.php">
               <div class="sb-nav-link-icon">
                 <i class="fas fa-gear"></i>
               </div>
@@ -113,39 +118,45 @@ if (!isset($_SESSION["kadis"])) {
       <main>
         <div class="container-fluid px-3">
           <ol class="breadcrumb mb-4 mt-2">
-            <li class="breadcrumb-item active">Data Pegawai</li>
+            <li class="breadcrumb-item active">Profil</li>
           </ol>
-
           <div class="card">
             <div class="card-body">
-              <table id="datatablesSimple">
-                <thead>
-                  <tr style="font-size: 16px;">
-                    <th>No</th>
-                    <th>NIP</th>
-                    <th>Nama</th>
-                    <th>Username</th>
-                    <th>No Telpon</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php
-                  $no = 1;
-                  $get_pegawai = mysqli_query($conn, "SELECT * FROM pegawai");
-                  while ($p = mysqli_fetch_array($get_pegawai)) {
-                  ?>
-                    <tr style="font-size: 16px;" id="klik-tabel">
-                      <td><?php echo $no++; ?></td>
-                      <td><?php echo $p['nip']; ?></td>
-                      <td><?php echo $p['nama']; ?></td>
-                      <td><?php echo $p['username']; ?></td>
-                      <td><?php echo $p['telp']; ?></td>
+              <?php
+              $id_kpldinas = $_SESSION['kadis']['id_kpldinas'];
+              $profil = mysqli_query($conn, "SELECT * FROM kepala_dinas WHERE id_kpldinas = '$id_kpldinas'");
+              $row = mysqli_fetch_array($profil);
+              ?>
+              <a href="setting-edit.php?id_kpldinas=<?php echo $row['id_kpldinas'] ?>" class="btn btn-sm btn-success">Edit</a>
+              <div class="table-responsive">
+                <table class="m-3 p-3">
+                  <thead>
+                    <tr>
+                      <th>Nama</th>
+                      <td>:</td>
+                      <td><?php echo $row['nama'] ?></td>
                     </tr>
-                  <?php } ?>
-                </tbody>
-              </table>
+                    <tr>
+                      <th>NIP</th>
+                      <td>:</td>
+                      <td><?php echo $row['nip'] ?></td>
+                    </tr>
+                    <tr>
+                      <th>Username</th>
+                      <td>:</td>
+                      <td><?php echo $row['username'] ?></td>
+                    </tr>
+                    <tr>
+                      <th>Password</th>
+                      <td>:</td>
+                      <td><?php echo $row['password'] ?></td>
+                    </tr>
+                  </thead>
+                </table>
+              </div>
             </div>
           </div>
+        </div>
       </main>
       <footer class="mt-5">
       </footer>

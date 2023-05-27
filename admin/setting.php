@@ -1,7 +1,7 @@
 <?php
 session_start();
 include("../database/db.php");
-if (!isset($_SESSION["kadis"])) {
+if (!isset($_SESSION["admin"])) {
   echo "<script>location='../index.php'</script>";
 }
 
@@ -15,7 +15,7 @@ if (!isset($_SESSION["kadis"])) {
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <meta name="description" content="" />
   <meta name="author" content="" />
-  <title>CUTI | KADIS</title>
+  <title>CUTI | Admin</title>
   <link rel="icon" type="image/png" href="">
   <!-- endinject -->
   <link rel="shortcut icon" href="../../images/LOGO UNMUL.png" />
@@ -25,6 +25,11 @@ if (!isset($_SESSION["kadis"])) {
   <style>
     #ftz16 {
       font-size: 16px;
+    }
+
+    table tr th,
+    td {
+      padding: 5px 8px;
     }
 
     body {
@@ -37,7 +42,7 @@ if (!isset($_SESSION["kadis"])) {
   <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
 
 
-    <a class="navbar-brand ps-3" href="index.php"> CUTI | KADIS</a>
+    <a class="navbar-brand ps-3" href="index.php"> CUTI | ADMIN</a>
     <!-- Navbar Brand-->
     <!-- Sidebar Toggle-->
     <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!">
@@ -46,7 +51,7 @@ if (!isset($_SESSION["kadis"])) {
 
     <!-- navbar nama -->
     <div class="navbar-nav ps-3 d-md-inline-block form-inline ms-auto" style="color: white; text-decoration: none">
-      <p><?php echo "<p>" . $_SESSION['kadis']['nama'] . "</p>" ?></p>
+      <p><?php echo "<p>" . $_SESSION['admin']['nama'] . "</p>" ?></p>
     </div>
 
     <!-- navbar icon  -->
@@ -59,7 +64,6 @@ if (!isset($_SESSION["kadis"])) {
             <hr class="dropdown-divider" />
           </li>
           <li><a href="logout.php" class="dropdown-item">logout</a></li>
-
         </ul>
       </li>
     </ul>
@@ -69,21 +73,14 @@ if (!isset($_SESSION["kadis"])) {
       <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
         <div class="sb-sidenav-menu">
           <div class="nav">
-            <div class="sb-sidenav-menu-heading">Super Admin</div>
+            <div class="sb-sidenav-menu-heading">Admin</div>
             <a class="nav-link" href="index.php">
               <div class="sb-nav-link-icon">
                 <i class="fas fa-home"></i>
               </div>
               Dashboard
             </a>
-            <a class="nav-link" href="admin.php">
-              <div class="sb-nav-link-icon">
-                <i class="fas fa-address-book"></i>
-              </div>
-              Admin
-            </a>
-
-            <a class="nav-link aktif" href="pegawai.php">
+            <a class="nav-link" href="pegawai.php">
               <div class="sb-nav-link-icon">
                 <i class="fas fa-address-book"></i>
               </div>
@@ -95,7 +92,7 @@ if (!isset($_SESSION["kadis"])) {
               </div>
               Cuti
             </a>
-            <a class="nav-link" href="setting.php">
+            <a class="nav-link aktif" href="setting.php">
               <div class="sb-nav-link-icon">
                 <i class="fas fa-gear"></i>
               </div>
@@ -105,7 +102,7 @@ if (!isset($_SESSION["kadis"])) {
         </div>
         <div class="sb-sidenav-footer">
           <div class="small">masuk sebagai:</div>
-          <h6>Super Admin</h6>
+          <h6>Admin</h6>
         </div>
       </nav>
     </div>
@@ -113,37 +110,52 @@ if (!isset($_SESSION["kadis"])) {
       <main>
         <div class="container-fluid px-3">
           <ol class="breadcrumb mb-4 mt-2">
-            <li class="breadcrumb-item active">Data Pegawai</li>
+            <li class="breadcrumb-item active">Profil</li>
           </ol>
-
           <div class="card">
             <div class="card-body">
-              <table id="datatablesSimple">
-                <thead>
-                  <tr style="font-size: 16px;">
-                    <th>No</th>
-                    <th>NIP</th>
-                    <th>Nama</th>
-                    <th>Username</th>
-                    <th>No Telpon</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php
-                  $no = 1;
-                  $get_pegawai = mysqli_query($conn, "SELECT * FROM pegawai");
-                  while ($p = mysqli_fetch_array($get_pegawai)) {
-                  ?>
-                    <tr style="font-size: 16px;" id="klik-tabel">
-                      <td><?php echo $no++; ?></td>
-                      <td><?php echo $p['nip']; ?></td>
-                      <td><?php echo $p['nama']; ?></td>
-                      <td><?php echo $p['username']; ?></td>
-                      <td><?php echo $p['telp']; ?></td>
+              <?php
+              $id_admin = $_SESSION['admin']['id_admin'];
+              $profil = mysqli_query($conn, "SELECT * FROM admin WHERE id_admin = '$id_admin'");
+              $row = mysqli_fetch_array($profil);
+              ?>
+              <a href="setting-edit.php?id_admin=<?php echo $row['id_admin'] ?>" class="btn btn-sm btn-success">Edit</a>
+              <div class="table-responsive">
+                <table class="m-3 p-3">
+                  <thead>
+                    <tr>
+                      <th>Nama</th>
+                      <td>:</td>
+                      <td><?php echo $row['nama'] ?></td>
                     </tr>
-                  <?php } ?>
-                </tbody>
-              </table>
+                    <tr>
+                      <th>NIP</th>
+                      <td>:</td>
+                      <td><?php echo $row['nip'] ?></td>
+                    </tr>
+                    <tr>
+                      <th>No Telepon</th>
+                      <td>:</td>
+                      <td><?php echo $row['telp_admin'] ?></td>
+                    </tr>
+                    <tr>
+                      <th>Jenis Kelamin</th>
+                      <td>:</td>
+                      <td><?php echo $row['jenis_kelamin'] ?></td>
+                    </tr>
+                    <tr>
+                      <th>Username</th>
+                      <td>:</td>
+                      <td><?php echo $row['user_admin'] ?></td>
+                    </tr>
+                    <tr>
+                      <th>Password</th>
+                      <td>:</td>
+                      <td><?php echo $row['pass_admin'] ?></td>
+                    </tr>
+                  </thead>
+                </table>
+              </div>
             </div>
           </div>
       </main>

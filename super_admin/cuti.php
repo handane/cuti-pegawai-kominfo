@@ -54,7 +54,7 @@ if (!isset($_SESSION["kadis"])) {
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item" href="index.php">Profil</a></li>
+          <li><a class="dropdown-item" href="setting.php">Profil</a></li>
           <li>
             <hr class="dropdown-divider" />
           </li>
@@ -151,8 +151,7 @@ if (!isset($_SESSION["kadis"])) {
                         ?>
                           <h6 class="btn btn-sm btn-secondary">Menunggu Persetujuan</h6>
                         <?php
-                        }
-                        else if ($p['status_cuti'] == 'ditolak') {
+                        } else if ($p['status_cuti'] == 'ditolak') {
                         ?>
                           <b style="color: red;">Ditolak</b>
                         <?php
@@ -167,12 +166,11 @@ if (!isset($_SESSION["kadis"])) {
                         <?php
                         if ($p['status_cuti'] == 'Disetujui') {
                         ?>
-                          <a href="cetak.php" class="btn btn-sm btn-warning m-1">Cetak</a>
+                          <a href="cetak.php?id_pengajuan=<?php echo $p['id_pengajuan'] ?>" class="btn btn-sm btn-warning m-1">Cetak</a>
                         <?php
-                        } else if($p['status_cuti'] == 'ditolak'){
+                        } else if ($p['status_cuti'] == 'ditolak') {
                           echo "-";
-                        }
-                         else {
+                        } else {
                         ?>
                           <a href="cuti-persetujuan.php?id_pengajuan=<?php echo $p['id_pengajuan'] ?>" onclick="return confirm('apakah anda yakin ingin menyetujui cuti <?php echo $p['nama'] ?>')" class="btn btn-sm btn-success"><i class="fas fa-check"></i></a>
                           <a class="btn btn-sm btn-danger" onclick="return confirm('apakah anda yakin ingin menolak cuti <?php echo $p['nama'] ?>')" href="permohonan-delete.php?id_pengajuan=<?php echo $p['id_pengajuan'] ?>&id_pegawai=<?php echo $p['id_pegawai'] ?>">X</a>
