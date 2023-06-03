@@ -147,7 +147,9 @@ if (!isset($_SESSION["admin"])) {
                                 '" . $nama_baru . "',
                                 '" . $username_baru . "',
                                 '" . $password_baru . "',
-                                '" . $telp_baru . "'
+                                '" . $telp_baru . "',
+                                '12',
+                                ''
                             )");
                     if ($get_regist) {
                       echo '<script>alert("akun berhasil dibuat")</script>';
@@ -183,6 +185,7 @@ if (!isset($_SESSION["admin"])) {
                   ?>
                     <tr style="font-size: 16px;" id="klik-tabel">
                       <td><?php echo $no++; ?></td>
+                      <td><img src="../pegawai/foto/<?= $p['foto'] ?>" alt="" width="70px;" height="70px;"></td>
                       <td><?php echo $p['nip']; ?></td>
                       <td><?php echo $p['nama']; ?></td>
                       <td><?php echo $p['username']; ?></td>

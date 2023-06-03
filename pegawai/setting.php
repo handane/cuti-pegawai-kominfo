@@ -124,6 +124,9 @@ if (!isset($_SESSION["pegawai"])) {
               <div class="table-responsive">
                 <table class="m-3 p-3">
                   <thead>
+                    <tr>  
+                      <td colspan="3" class="text-center"><img src="foto/<?= $row['foto'] ?>" alt="empty image" style="width:110px; height:110px; border-radius:50%; border: 1px solid grey"></td>
+                    </tr>
                     <tr>
                       <th>Nama</th>
                       <td>:</td>

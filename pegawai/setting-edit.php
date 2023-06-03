@@ -115,10 +115,14 @@ if (!isset($_SESSION["pegawai"])) {
               $edit = mysqli_query($conn, "SELECT * FROM pegawai WHERE id_pegawai = '$id_pegawai'");
               if (mysqli_num_rows($edit) > 0) {
                 while ($row = mysqli_fetch_array($edit)) {
-              ?>
+                  ?>
 
-                  <form class="row g-3" method="POST" enctype="multipart/form-data">
-                    <div class="col-md-6">
+<form class="row g-3" method="POST" enctype="multipart/form-data">
+  <div class="col-md-6">
+    <label for="" class="form-label-md"><b>Upload Foto Profil</b></label>
+    <input type="file" class="form-control" name="foto" />
+  </div>
+  <div class="col-md-6">
                       <label for="" class="form-label-md"><b>Nama</b></label>
                       <input type="text" class="form-control" name="nama" value="<?php echo $row['nama'] ?>" />
                     </div>
@@ -153,12 +157,25 @@ if (!isset($_SESSION["pegawai"])) {
                 $username = $_POST['username'];
                 $password = $_POST['password'];
 
+
+                $filename1 = $_FILES['foto']['name'];
+                $tmp_name1 = $_FILES['foto']['tmp_name'];
+                $ukuran1 = $_FILES['foto']['size'];
+                $type1 = explode('.', $filename1); // file kegiatan pembelajaran
+                $type2 = $type1[1];
+                $newname1 = $author . 'f' . time() . '.' . $type2;
+                $tipe_diizinkan = array('jpg', 'jpeg', 'png', '');
+
+                $dest = "./foto/" . $_FILES['foto_1']['name'];
+                move_uploaded_file($tmp_name1, './foto/' . $newname1);
+                
                 $update = mysqli_query($conn, "UPDATE pegawai SET 
                 nip = '$nip',
                 nama = '$nama',
                 telp = '$telp',
                 username = '$username',
-                password = '$password'
+                password = '$password',
+                foto = '$newname1'
                 WHERE id_pegawai = '$id_pegawai'");
                 if ($update) {
               ?>

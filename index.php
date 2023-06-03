@@ -47,33 +47,24 @@ session_start();
                 <div class="login">
                   <button class="btn btn-success form-control btn-block" name="submit" type="submit">Masuk</button><br>
                 </div>
-                <!-- <button type="button" class="mt-3" style="background: none;border:none; color:grey;" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Buat akun</button> -->
+                <button type="button" class="mt-3" style="background: none;border:none; color:grey;" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Buat akun pegawai</button>
               </form>
               <!-- tanggapan -->
               <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h6>Registrasi Mahasiswa</h6>
+                      <h6>Registrasi Pegawai</h6>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <form method="POST">
                       <div class="modal-body">
                         <div class="mb-3">
-                          <input type="text" class="form-control mt-3" id="recipient-name" autocomplete="off" name="nim_baru" placeholder="NIM">
+                          <input type="text" class="form-control mt-3" id="recipient-name" autocomplete="off" name="nip_baru" placeholder="nip">
                           <input type="text" class="form-control mt-3" id="recipient-name" autocomplete="off" name="nama_baru" placeholder="Nama Lengkap">
-                          <select name="jeniskelamin_baru" class="form-control mt-3" id="recipient-name" autocomplete="off" id="">
-                            <option>-- Jenis Kelamin --</option>
-                            <option value="laki-laki">Laki-laki</option>
-                            <option value="Perempuan">Perempuan</option>
-                          </select>
-                          <input type="text" class="form-control mt-3" id="recipient-name" autocomplete="off" name="fakultas_baru" placeholder="fakultas">
-                          <input type="text" class="form-control mt-3" id="recipient-name" autocomplete="off" name="prodi_baru" placeholder="prodi">
-                          <input type="text" class="form-control mt-3" id="recipient-name" autocomplete="off" name="kelas_baru" placeholder="Kelas">
-                          <input type="text" class="form-control mt-3" id="recipient-name" autocomplete="off" name="alamat_baru" placeholder="alamat">
-                          <input type="text" class="form-control mt-3" id="recipient-name" autocomplete="off" name="telp_baru" placeholder="telp">
-                          <input type="text" class="form-control mt-3" id="recipient-name" autocomplete="off" name="user_baru" placeholder="Username">
-                          <input type="text" class="form-control mt-3" id="recipient-name" autocomplete="off" name="pass_baru" placeholder="Password">
+                          <input type="text" class="form-control mt-3" id="recipient-name" autocomplete="off" name="username_baru" placeholder="username">
+                          <input type="text" class="form-control mt-3" id="recipient-name" autocomplete="off" name="password_baru" placeholder="password">
+                          <input type="text" class="form-control mt-3" id="recipient-name" autocomplete="off" name="telp_baru" placeholder="no.telpon">
                         </div>
                       </div>
                       <div class="modal-footer">
@@ -83,30 +74,22 @@ session_start();
                     <?php
                     // include_once("db.php");
                     if (isset($_POST["regist"])) {
-                      $nim_baru = $_POST['nim_baru'];
+                      $nip_baru = $_POST['nip_baru'];
                       $nama_baru = $_POST['nama_baru'];
-                      $jeniskelamin_baru = $_POST['jeniskelamin_baru'];
-                      $fakultas_baru = $_POST['fakultas_baru'];
-                      $prodi_baru = $_POST['prodi_baru'];
-                      $kelas_baru = $_POST['kelas_baru'];
-                      $alamat_baru = $_POST['alamat_baru'];
+                      $username_baru = $_POST['username_baru'];
+                      $password_baru = $_POST['password_baru'];
                       $telp_baru = $_POST['telp_baru'];
-                      $user_baru = $_POST['user_baru'];
-                      $pass_baru = $_POST['pass_baru'];
-                      $cek_regist = mysqli_query($conn, "SELECT * FROM mahasiswa WHERE user_mahasiswa = '$user_baru'");
+                      $cek_regist = mysqli_query($conn, "SELECT * FROM pegawai WHERE username = '$username_baru' OR nip = '$nip_baru'");
                       if (mysqli_num_rows($cek_regist) == 0) {
-                        $get_regist = mysqli_query($conn, "INSERT INTO mahasiswa VALUE(
+                        $get_regist = mysqli_query($conn, "INSERT INTO pegawai VALUE(
                                 null,
-                                '" . $nim_baru . "',
+                                '" . $nip_baru . "',
                                 '" . $nama_baru . "',
-                                '" . $user_baru . "',
-                                '" . $pass_baru . "',
-                                '" . $jeniskelamin_baru . "',
-                                '" . $kelas_baru . "',
-                                '" . $alamat_baru . "',
-                                '" . $fakultas_baru . "',
-                                '" . $prodi_baru . "',
-                                '" . $telp_baru . "'
+                                '" . $username_baru . "',
+                                '" . $password_baru . "',
+                                '" . $telp_baru . "',
+                                '12',
+                                ''
                             )");
                         if ($get_regist) {
                           echo '<script>alert("akun berhasil dibuat")</script>';

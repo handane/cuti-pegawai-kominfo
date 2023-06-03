@@ -106,8 +106,66 @@ if (!isset($_SESSION["admin"])) {
       <main>
         <div class="container-fluid px-3">
           <ol class="breadcrumb mb-4 mt-2">
-            <li class="breadcrumb-item active">Data Cuti Kadis</li>
+            <li class="breadcrumb-item active">Laporan Cuti</li>
           </ol>
+          <button type="button" class="mb-3 btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Jenis Cuti</button>
+          <!-- tanggapan -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h6>Jenis Cuti</h6>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form method="POST">
+                  <div class="modal-body">
+                    <div class="mb-3">
+                      <label for="recipent-name">Tambah Jenis Cuti</label>
+                      <input type="text" class="form-control mb-3" id="recipient-name" autocomplete="off" name="jenisCutiBaru" value="">
+                      <?php
+                      $jenisCuti = mysqli_query($conn, "SELECT * FROM jenis_cuti");
+                      if (mysqli_num_rows($jenisCuti) > 0) {
+                        while ($pq = mysqli_fetch_array($jenisCuti)) {
+                      ?>
+                          <ul>
+                            <li><?= $pq['jenis_cuti'] ?> <a href="cuti-delete.php?id_jeniscuti=<?= $pq['id_jeniscuti'] ?>" onclick="return confirm('konfirmasi hapus')" ><img src="../icons/trash-fill-2.svg"> </a></li>
+                          </ul>
+                      <?php }
+                      } ?>
+
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <input type="submit" class="btn btn-primary" name="regist" value="Save">
+                  </div>
+                </form>
+                <?php
+                // include_once("db.php");
+                if (isset($_POST["regist"])) {
+                  $jenisCutiBaru = $_POST['jenisCutiBaru'];
+                  $cek_regist = mysqli_query($conn, "SELECT * FROM jenis_cuti WHERE jenis_cuti = '$jenisCutiBaru'");
+                  if (mysqli_num_rows($cek_regist) == 0) {
+                    $get_regist = mysqli_query($conn, "INSERT INTO jenis_cuti VALUE(
+                                null,
+                                '" . $jenisCutiBaru . "'
+                            )");
+                    if ($get_regist) {
+                      echo '
+                      <script>
+                        alert("berhasil disimpan");
+                        window.location="cuti.php";
+                      </script>';
+                    } else {
+                      echo '<script>alert("Gagal")</script>';
+                    }
+                  } else {
+                    echo '<script>alert("Gagal, jenis cuit sudah ada")</script>';
+                  }
+                }
+                ?>
+              </div>
+            </div>
+          </div>
           <div class="card">
             <div class="card-body">
               <table id="datatablesSimple">
