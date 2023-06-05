@@ -108,8 +108,9 @@ if (!isset($_SESSION["admin"])) {
           <ol class="breadcrumb mb-4 mt-2">
             <li class="breadcrumb-item active">Laporan Cuti</li>
           </ol>
-          <button type="button" class="mb-3 btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Jenis Cuti</button>
-          <!-- tanggapan -->
+          <button type="button" class="mb-2 btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Jenis Cuti</button>
+          <a href="cetak-laporan-cuti.php" class="btn btn-sm btn-warning mb-2">Cetak Laporan</a>
+          <!-- jenis cuti -->
           <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
@@ -128,7 +129,7 @@ if (!isset($_SESSION["admin"])) {
                         while ($pq = mysqli_fetch_array($jenisCuti)) {
                       ?>
                           <ul>
-                            <li><?= $pq['jenis_cuti'] ?> <a href="cuti-delete.php?id_jeniscuti=<?= $pq['id_jeniscuti'] ?>" onclick="return confirm('konfirmasi hapus')" ><img src="../icons/trash-fill-2.svg"> </a></li>
+                            <li><?= $pq['jenis_cuti'] ?> <a href="cuti-delete.php?id_jeniscuti=<?= $pq['id_jeniscuti'] ?>" onclick="return confirm('konfirmasi hapus')"><img src="../icons/trash-fill-2.svg"> </a></li>
                           </ul>
                       <?php }
                       } ?>
@@ -166,6 +167,37 @@ if (!isset($_SESSION["admin"])) {
               </div>
             </div>
           </div>
+          <!-- cetak laporan -->
+          <!-- <div class="modal fade" id="cetaklaporan" tabindex="-1" aria-labelledby="cetaklaporanLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h6>Periode Laporan</h6>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form method="POST" action="cetak-laporan-cuti.php">
+                  <div class="modal-body">
+                    <div class="col-md-12">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <label for="">Dari</label>
+                          <input type="date" class="form-control col-md-6" id="tglmulai" autocomplete="off" name="awal" value="" required>
+                        </div>
+                        <div class="col-md-6">
+                          <label for="">Sampai</label>
+                          <input type="date" class="form-control col-md-6" id="tglmulai" autocomplete="off" name="akhir" value="" required>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <input type="submit" class="btn btn-primary" name="periode" value="Save">
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div> -->
+          <!--  -->
           <div class="card">
             <div class="card-body">
               <table id="datatablesSimple">
