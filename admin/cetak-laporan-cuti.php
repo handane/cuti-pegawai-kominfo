@@ -1,5 +1,6 @@
 <?php
 session_start();
+error_reporting(0);
 include("../database/db.php");
 if (!isset($_SESSION["admin"])) {
   echo "<script>location='../index.php'</script>";
@@ -15,7 +16,7 @@ if (!isset($_SESSION["admin"])) {
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <meta name="description" content="" />
   <meta name="author" content="" />
-  <title>CUTI | admin</title>
+  <title>Cetak Laporan</title>
   <link rel="icon" type="image/png" href="">
   <!-- endinject -->
   <link rel="shortcut icon" href="../../images/LOGO UNMUL.png" />

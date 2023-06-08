@@ -109,7 +109,7 @@ if (!isset($_SESSION["admin"])) {
             <li class="breadcrumb-item active">Laporan Cuti</li>
           </ol>
           <button type="button" class="mb-2 btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Jenis Cuti</button>
-          <a href="cetak-laporan-cuti.php" class="btn btn-sm btn-warning mb-2">Cetak Laporan</a>
+          <a href="cetak-laporan-cuti.php" target="_blank" class="btn btn-sm btn-warning mb-2">Cetak Laporan</a>
           <!-- jenis cuti -->
           <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -249,7 +249,8 @@ if (!isset($_SESSION["admin"])) {
                         <?php
                         if ($p['status_cuti'] == 'Disetujui') {
                         ?>
-                          <a href="cetak.php?id_pengajuan=<?php echo $p['id_pengajuan'] ?>" class="btn btn-sm btn-warning m-1">Cetak</a>
+                          <a href="cetak.php?id_pengajuan=<?php echo $p['id_pengajuan'] ?>" class="btn btn-sm btn-warning m-1" target="_blank">Cetak Surat</a>
+                          <a href="cetak-form.php?id_pengajuan=<?php echo $p['id_pengajuan'] ?>" class="btn btn-sm btn-info m-1" target="_blank">Cetak Form</a>
                         <?php
                         } else if ($p['status_cuti'] == 'ditolak') {
                           echo "-";

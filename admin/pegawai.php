@@ -170,6 +170,7 @@ if (!isset($_SESSION["admin"])) {
                 <thead>
                   <tr style="font-size: 16px;">
                     <th>No</th>
+                    <th>Foto</th>
                     <th>NIP</th>
                     <th>Nama</th>
                     <th>Username</th>

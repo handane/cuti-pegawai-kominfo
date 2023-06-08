@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 27, 2023 at 08:24 AM
+-- Generation Time: Jun 08, 2023 at 08:07 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.5
 
@@ -63,7 +63,9 @@ CREATE TABLE `jenis_cuti` (
 INSERT INTO `jenis_cuti` (`id_jeniscuti`, `jenis_cuti`) VALUES
 (1, 'Cuti Melahirkan'),
 (2, 'Cuti Sakit'),
-(3, 'Cuti Tahunan');
+(3, 'Cuti Tahunan'),
+(4, 'Cuti Liburan'),
+(8, 'cuti lembur');
 
 -- --------------------------------------------------------
 
@@ -99,19 +101,22 @@ CREATE TABLE `pegawai` (
   `username` varchar(20) NOT NULL,
   `password` varchar(20) NOT NULL,
   `telp` varchar(16) NOT NULL,
-  `jumlah_cuti` int(11) NOT NULL
+  `jumlah_cuti` int(11) NOT NULL,
+  `foto` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `pegawai`
 --
 
-INSERT INTO `pegawai` (`id_pegawai`, `nip`, `nama`, `username`, `password`, `telp`, `jumlah_cuti`) VALUES
-(1, '9983823632023', 'Maria Yuryevna Sharapova', 'mariasharapova', 'mariasharapova', '9999923201022', 12),
-(2, '238446530012023', 'Lewis Hammilton', 'lewishammilton', 'lewishammilton', '09375757213', 12),
-(3, '23885013572023', 'Alexander Zyelinsky', 'alexander', 'alexander', '0774284881000', 12),
-(4, '8000000000000', 'Emilia Clarke', 'emiliaclarke', 'emiliaclarke', '0998212121', 12),
-(6, '232347379002020', 'Squwilliam Percycents', 'william', 'william', '06463829939012', 12);
+INSERT INTO `pegawai` (`id_pegawai`, `nip`, `nama`, `username`, `password`, `telp`, `jumlah_cuti`, `foto`) VALUES
+(1, '9983823632023', 'Maria Yuryevna Sharapova', 'mariasharapova', 'mariasharapova', '9999923201022', 12, ''),
+(2, '238446530012023', 'Lewis Hammilton', 'lewishammilton', 'lewishammilton', '09375757213', 12, ''),
+(3, '23885013572023', 'Alexander Zyelinsky', 'alexander', 'alexander', '0774284881000', 12, ''),
+(4, '8000000000000', 'Emilia Clarke', 'emiliaclarke', 'emiliaclarke', '0998212121', 12, ''),
+(6, '232347379002020', 'Squwilliam Percycents', 'william', 'william', '06463829939012', 12, 'f1685769460.jpg'),
+(7, '9933322211', 'Alejandro Garnacho', 'alejandro', 'alejandro', '0823333333', 12, ''),
+(8, '873882138', 'Presnell Kimpembe', 'kimpembe', 'kimpembe', '08233312333', 12, 'f1685769140.png');
 
 -- --------------------------------------------------------
 
@@ -178,7 +183,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `jenis_cuti`
 --
 ALTER TABLE `jenis_cuti`
-  MODIFY `id_jeniscuti` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_jeniscuti` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `kepala_dinas`
@@ -190,13 +195,13 @@ ALTER TABLE `kepala_dinas`
 -- AUTO_INCREMENT for table `pegawai`
 --
 ALTER TABLE `pegawai`
-  MODIFY `id_pegawai` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_pegawai` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `pengajuan`
 --
 ALTER TABLE `pengajuan`
-  MODIFY `id_pengajuan` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_pengajuan` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
