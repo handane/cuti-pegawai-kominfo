@@ -175,6 +175,7 @@ if (!isset($_SESSION["admin"])) {
                     <th>Nama</th>
                     <th>Username</th>
                     <th>No Telpon</th>
+                    <th>Jumlah Cuti</th>
                     <th></th>
                   </tr>
                 </thead>
@@ -191,6 +192,7 @@ if (!isset($_SESSION["admin"])) {
                       <td><?php echo $p['nama']; ?></td>
                       <td><?php echo $p['username']; ?></td>
                       <td><?php echo $p['telp']; ?></td>
+                      <td><?php echo $p['jumlah_cuti']; ?></td>
                       <td>
                         <a class="btn btn-sm btn-success" href="pegawai-edit.php?id_pegawai=<?php echo $p['id_pegawai'] ?>">Edit</a>
                         <a class="btn btn-sm btn-danger" onclick="return confirm('apakah anda yakin ingin menghapus akun <?php echo $p['nama'] ?>')" href="pegawai-delete.php?id_pegawai=<?php echo $p['id_pegawai'] ?>">Delete</a>

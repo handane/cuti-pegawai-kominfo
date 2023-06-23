@@ -166,21 +166,24 @@ if (!isset($_SESSION["pegawai"])) {
                 $tgl_berakhir = $_POST['tgl_berakhir'];
                 $alasan_cuti = $_POST['alasan_cuti'];
                 $status_cuti = "Menunggu Persetujuan";
-
-                $cek_jumlah = mysqli_query($conn, "SELECT * FROM pegawai WHERE id_pegawai = '$id_pegawai'");
-                $cek_jumlah_2 = mysqli_fetch_array($cek_jumlah);
-                $waktu_awal = date_create($tgl_cuti);
-                $waktu_akhir = date_create($tgl_berakhir);
-                $diff = date_diff($waktu_awal, $waktu_akhir);
-                $diff_d = $diff->d;
-                $jumlah_cuti = $cek_jumlah_2['jumlah_cuti'] - $diff_d;
+                  $cek_jumlah = mysqli_query($conn, "SELECT * FROM pegawai WHERE id_pegawai = '$id_pegawai'");
+                  $cek_jumlah_2 = mysqli_fetch_array($cek_jumlah);
+                  $waktu_awal = date_create($tgl_cuti);
+                  $waktu_akhir = date_create($tgl_berakhir);
+                  $diff = date_diff($waktu_awal, $waktu_akhir);
+                  $diff_d = $diff->d;
+                  $jumlah_cuti = $cek_jumlah_2['jumlah_cuti'] - $diff_d;
 
                 if ($cek_jumlah_2['jumlah_cuti'] != 0) {
                   if ($cek_jumlah_2['jumlah_cuti'] >= $diff_d) {
-                    $update2 = mysqli_query($conn, "UPDATE pegawai SET 
-                      jumlah_cuti = '$jumlah_cuti'
-                      WHERE id_pegawai = '$id_pegawai'
-                    ");
+                    if($id_jeniscuti == 3){
+                      $update2 = mysqli_query($conn, "UPDATE pegawai SET 
+                        jumlah_cuti = '$jumlah_cuti'
+                        WHERE id_pegawai = '$id_pegawai'
+                      ");
+                    }if($id_jeniscuti != 3){
+
+                    }
 
                     $update = mysqli_query($conn, "INSERT INTO pengajuan VALUE(
                               null,
@@ -191,7 +194,7 @@ if (!isset($_SESSION["pegawai"])) {
                               '" . $tgl_berakhir . "',
                               '" . $alasan_cuti . "',
                               '" . $status_cuti . "')");
-                    if ($update and $update2) {
+                    if ($update OR $update2) {
               ?>
               <?php
                       echo

@@ -126,16 +126,21 @@ if (!isset($_SESSION["kadis"])) {
                 <form method="POST">
                   <div class="modal-body">
                     <div class="mb-3">
-                      <input type="text" class="form-control mt-3" id="recipient-name" autocomplete="off" name="nama_baru" placeholder="Nama">
-                      <input type="text" class="form-control mt-3" id="recipient-name" autocomplete="off" name="nip_baru" placeholder="NIP">
-                      <input type="text" class="form-control mt-3" id="recipient-name" autocomplete="off" name="telp_baru" placeholder="No Telepon">
-                      <select name="jeniskelamin_baru" class="form-control mt-3" id="recipient-name" autocomplete="off" id="">
-                        <option>-- Jenis Kelamin --</option>
+                      <label for="" class="mt-3">Nama</label>
+                      <input type="text" class="form-control" id="recipient-name" autocomplete="off" name="nama_baru">
+                      <label for="" class="mt-3">NIP</label>
+                      <input type="text" class="form-control" id="recipient-name" autocomplete="off" name="nip_baru">
+                      <label for="" class="mt-3">No. Telepon</label>
+                      <input type="text" class="form-control" id="recipient-name" autocomplete="off" name="telp_baru">
+                      <label for="" class="mt-3">Jenis Kelamin</label>
+                      <select name="jeniskelamin_baru" class="form-control" id="recipient-name" autocomplete="off">
                         <option value="laki-laki">Laki-laki</option>
                         <option value="Perempuan">Perempuan</option>
                       </select>
-                      <input type="text" class="form-control mt-3" id="recipient-name" autocomplete="off" name="user_baru" placeholder="Username">
-                      <input type="text" class="form-control mt-3" id="recipient-name" autocomplete="off" name="pass_baru" placeholder="Password">
+                      <label for="" class="mt-3">Username</label>
+                      <input type="text" class="form-control" id="recipient-name" autocomplete="off" name="user_baru" value="admin_">
+                      <label for="" class="mt-3">Password</label>
+                      <input type="text" class="form-control" id="recipient-name" autocomplete="off" name="pass_baru" value="admin_">
                     </div>
                   </div>
                   <div class="modal-footer">

@@ -131,6 +131,10 @@ if (!isset($_SESSION["admin"])) {
                         <label for="" class="form-label-md"><b>No Telepon</b></label>
                         <input type="text" class="form-control" name="telp" value="<?php echo $row['telp'] ?>" />
                       </div>
+                      <div class="col-md-6">
+                        <label for="" class="form-label-md"><b>Jumlah Cuti</b></label>
+                        <input type="number" class="form-control" min="0" max="12" name="jumlah_cuti" value="<?php echo $row['jumlah_cuti'] ?>" />
+                      </div>
                       <div class="col-md-12">
                         <input type="submit" class="btn btn-success" name="submit" value="Save" />
                       </div>
@@ -144,11 +148,13 @@ if (!isset($_SESSION["admin"])) {
                 $nama = $_POST['nama'];
                 $nip = $_POST['nip'];
                 $telp = $_POST['telp'];
+                $jumlah_cuti = $_POST['jumlah_cuti'];
 
                 $update = mysqli_query($conn, "UPDATE pegawai SET
                            nip = '$nip',
                            nama = '$nama',
-                           telp = '$telp' 
+                           telp = '$telp',
+                           jumlah_cuti = '$jumlah_cuti'
                            WHERE id_pegawai = '$id_pegawai'");
                 if ($update) {
               ?>
