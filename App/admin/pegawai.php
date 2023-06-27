@@ -195,7 +195,7 @@ if (!isset($_SESSION["admin"])) {
                       <td><?php echo $p['jumlah_cuti']; ?></td>
                       <td>
                         <a class="btn btn-sm btn-success" href="pegawai-edit.php?id_pegawai=<?php echo $p['id_pegawai'] ?>">Edit</a>
-                        <a class="btn btn-sm btn-danger" onclick="return confirm('apakah anda yakin ingin menghapus akun <?php echo $p['nama'] ?>')" href="pegawai-delete.php?id_pegawai=<?php echo $p['id_pegawai'] ?>">Delete</a>
+                        <a class="btn btn-sm btn-danger" onclick="return confirm('apakah anda yakin ingin menghapus akun <?php echo $p['nama'] ?>, semua data akan hilang!')" href="pegawai-delete.php?id_pegawai=<?php echo $p['id_pegawai'] ?>">Delete</a>
                       </td>
                     </tr>
                   <?php } ?>

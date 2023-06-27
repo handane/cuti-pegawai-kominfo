@@ -103,11 +103,15 @@ if (!isset($_SESSION["admin"])) {
     .data .table-2,
     .data .table-3,
     .data .table-4,
-    .data .table-5 {
+    .data .table-5,
+    .data .table-6 {
       width: 100%;
     }
 
     .table-1 td {
+      width: 25%;
+    }
+    .ping1 {
       width: 25%;
     }
 
@@ -118,6 +122,10 @@ if (!isset($_SESSION["admin"])) {
 
     .table-4 td {
       width: 15%;
+    }
+
+    .table-6 .tel {
+      width: 20%;
     }
 
     .data .tdx1 {
@@ -313,15 +321,81 @@ if (!isset($_SESSION["admin"])) {
             <td></td>
           </tr>
         </table>
-      </div>
+        <table class="table-6 mt-3">
+          <tr>
+            <th colspan="6">VI. ALAMAT SELAMA MENJALANKAN CUTI</th>
+          </tr>
+          <tr>
+            <td colspan="3" rowspan="2">Pulang Kampung</td>
+            <td class="tb-keterangan-2">TELEPON</td>
+            <td class="tel"></td>
+          </tr>
+          <tr>
+            <td colspan="2" class="text-center">
+              Hormat saya,
+              <br><br><br><br>
+              <u><?= $pk['nama'] ?></u><br>
+              <?= $pk['nip'] ?>
+            </td>
 
-      <div class="mt-4 ms-5 ttd">
-        Samarinda, <?php echo $datem ?> <br>
-        Admin, <br>
-        <br><br><br>
-        <u><?= $_SESSION['admin']['nama'] ?></u><br>
-        Pembimbing Utama Muda / IV c <br>
-        NIP. <?= $_SESSION['admin']['nip'] ?>
+          </tr>
+        </table>
+        <table class="table-6 mt-3">
+          <tr>
+            <th colspan="6">VII. PERTIMBANGAN ATASAN LANGSUNG**</th>
+          </tr>
+          <tr>
+            <td class="text-center ping1">DISETUJUI</td>
+            <td class="text-center ping1">PERUBAHAN</td>
+            <td class="text-center ping1">DITANGGUHKAN</td>
+            <td class="text-center ping1">TIDAK DISETUJUI</td>
+          </tr>
+          <tr>
+            <td rowspan=""><br></td>
+            <td rowspan=""></td>
+            <td rowspan=""></td>
+            <td rowspan=""><br></td>
+          </tr>
+          <tr>
+            <td class="border border-0"></td>
+            <td class="border border-0"></td>
+            <td class="border border-0"></td>
+            <td class="text-center">
+              Dinas Kominfo Samarinda<br>
+              Sekretaris
+              <br><br><br><br>
+              <u><?= $_SESSION['admin']['nama'] ?></u><br>
+              <?= $_SESSION['admin']['nip'] ?>
+            </td>
+          </tr>
+        <table class="table-6 mt-3">
+          <tr>
+            <th colspan="6">VIII. KEPUTUSAN PEJABAT YANG BERWENANG MEMBERIKAN CUTI**</th>
+          </tr>
+          <tr>
+            <td class="text-center ping1">DISETUJUI</td>
+            <td class="text-center ping1">PERUBAHAN</td>
+            <td class="text-center ping1">DITANGGUHKAN</td>
+            <td class="text-center ping1">TIDAK DISETUJUI</td>
+          </tr>
+          <tr>
+            <td rowspan=""><br></td>
+            <td rowspan=""></td>
+            <td rowspan=""></td>
+            <td rowspan=""><br></td>
+          </tr>
+          <tr>
+            <td class="border border-0"></td>
+            <td class="border border-0"></td>
+            <td class="border border-0"></td>
+            <td class="text-center">
+              Kepala Dinas Kominfo Samarinda,
+              <br><br><br><br>
+              <u><?= $pkadis['nama'] ?></u><br>
+              <?= $pkadis['nip'] ?>
+            </td>
+          </tr>
+        </table>
       </div>
     </div>
   </main>
