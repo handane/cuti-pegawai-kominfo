@@ -5,7 +5,8 @@ include("../database/db.php");
 if (!isset($_SESSION["admin"])) {
   echo "<script>location='../index.php'</script>";
 }
-
+$startperiod = $_POST['startperiod'];
+$endperiod = $_POST['endperiod'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -96,12 +97,15 @@ if (!isset($_SESSION["admin"])) {
       width: 100%;
     }
 
-    .tb_data tr, .tb_data th, .tb_data td {
+    .tb_data tr,
+    .tb_data th,
+    .tb_data td {
       border: 1px solid black;
       padding: 4px;
       font-size: 12px;
       text-align: center;
     }
+
     .tb_data .title {
       text-align: left;
     }
@@ -186,7 +190,7 @@ if (!isset($_SESSION["admin"])) {
         <tbody>
           <?php
           $no = 1;
-          $ping2 = mysqli_query($conn, "SELECT * FROM pengajuan LEFT JOIN pegawai USING(id_pegawai) ORDER BY tgl_pengajuan ASC");
+          $ping2 = mysqli_query($conn, "SELECT * FROM pengajuan LEFT JOIN pegawai USING(id_pegawai) WHERE tgl_cuti BETWEEN '$startperiod' AND '$endperiod' ORDER BY tgl_pengajuan ASC");
           if (mysqli_num_rows($ping2) > 0) {
             while ($pk = mysqli_fetch_array($ping2)) {
           ?>

@@ -115,14 +115,14 @@ if (!isset($_SESSION["pegawai"])) {
               $edit = mysqli_query($conn, "SELECT * FROM pegawai WHERE id_pegawai = '$id_pegawai'");
               if (mysqli_num_rows($edit) > 0) {
                 while ($row = mysqli_fetch_array($edit)) {
-                  ?>
+              ?>
 
-<form class="row g-3" method="POST" enctype="multipart/form-data">
-  <div class="col-md-6">
-    <label for="" class="form-label-md"><b>Upload Foto Profil</b></label>
-    <input type="file" class="form-control" name="foto" />
-  </div>
-  <div class="col-md-6">
+                  <form class="row g-3" method="POST" enctype="multipart/form-data">
+                    <div class="col-md-6">
+                      <label for="" class="form-label-md"><b>Upload Foto Profil</b></label>
+                      <input type="file" class="form-control" name="foto" />
+                    </div>
+                    <div class="col-md-6">
                       <label for="" class="form-label-md"><b>Nama</b></label>
                       <input type="text" class="form-control" name="nama" value="<?php echo $row['nama'] ?>" />
                     </div>
@@ -142,6 +142,14 @@ if (!isset($_SESSION["pegawai"])) {
                       <label for="" class="form-label-md"><b>Password</b></label>
                       <input type="text" class="form-control" name="password" value="<?php echo $row['password'] ?>" readonly />
                     </div>
+                    <div class="col-md-6">
+                      <label for="" class="form-label-md"><b>Jenis Kelamin</b></label>
+                      <select name="jenis_kelamin" class="form-control" id="" required>
+                        <option></option>
+                        <option value="Laki-laki">Laki-laki</option>
+                        <option value="Perempuan">Perempuan</option>
+                      </select>
+                    </div>
                     <div class="col-md-12">
                       <input type="submit" class="btn btn-success" name="submit" value="Save" />
                     </div>
@@ -156,6 +164,7 @@ if (!isset($_SESSION["pegawai"])) {
                 $telp = $_POST['telp'];
                 $username = $_POST['username'];
                 $password = $_POST['password'];
+                $jenis_kelamin = $_POST['jenis_kelamin'];
 
 
                 $filename1 = $_FILES['foto']['name'];
@@ -168,14 +177,15 @@ if (!isset($_SESSION["pegawai"])) {
 
                 $dest = "./foto/" . $_FILES['foto_1']['name'];
                 move_uploaded_file($tmp_name1, './foto/' . $newname1);
-                
+
                 $update = mysqli_query($conn, "UPDATE pegawai SET 
                 nip = '$nip',
                 nama = '$nama',
                 telp = '$telp',
                 username = '$username',
                 password = '$password',
-                foto = '$newname1'
+                foto = '$newname1',
+                jenis_kelamin = '$jenis_kelamin'
                 WHERE id_pegawai = '$id_pegawai'");
                 if ($update) {
               ?>

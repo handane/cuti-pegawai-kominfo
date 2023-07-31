@@ -1,5 +1,5 @@
-<?php 
-  require('database/db.php');
+<?php
+require('database/db.php');
 session_start();
 ?>
 <!DOCTYPE html>
@@ -65,6 +65,11 @@ session_start();
                           <input type="text" class="form-control mt-3" id="recipient-name" autocomplete="off" name="username_baru" placeholder="username">
                           <input type="text" class="form-control mt-3" id="recipient-name" autocomplete="off" name="password_baru" placeholder="password">
                           <input type="text" class="form-control mt-3" id="recipient-name" autocomplete="off" name="telp_baru" placeholder="no.telpon">
+                          <select name="jenis_kelamin" class="form-control mt-3" id="" required>
+                            <option>-- Jenis Kelamin --</option>
+                            <option value="Laki-laki">Laki-laki</option>
+                            <option value="Perempuan">Perempuan</option>
+                          </select>
                         </div>
                       </div>
                       <div class="modal-footer">
@@ -79,6 +84,7 @@ session_start();
                       $username_baru = $_POST['username_baru'];
                       $password_baru = $_POST['password_baru'];
                       $telp_baru = $_POST['telp_baru'];
+                      $jenis_kelamin = $_POST['jenis_kelamin'];
                       $cek_regist = mysqli_query($conn, "SELECT * FROM pegawai WHERE username = '$username_baru' OR nip = '$nip_baru'");
                       if (mysqli_num_rows($cek_regist) == 0) {
                         $get_regist = mysqli_query($conn, "INSERT INTO pegawai VALUE(
@@ -89,7 +95,8 @@ session_start();
                                 '" . $password_baru . "',
                                 '" . $telp_baru . "',
                                 '12',
-                                ''
+                                '',
+                                '" . $jenis_kelamin . "'   
                             )");
                         if ($get_regist) {
                           echo '<script>alert("akun berhasil dibuat")</script>';
@@ -120,24 +127,19 @@ session_start();
                     $pegawai = $get_pegawai->fetch_assoc();
                     $_SESSION["pegawai"] = $pegawai;
                     echo "<script>location='pegawai/index.php';</script>";
-                  }
-                  else if ($akun_kadis == 1) {
+                  } else if ($akun_kadis == 1) {
                     $kadis = $get_kadis->fetch_assoc();
                     $_SESSION["kadis"] = $kadis;
                     echo "<script>location='super_admin/index.php';</script>";
-                  } 
-                  else if ($akun_admin == 1) {
+                  } else if ($akun_admin == 1) {
                     $admin = $get_admin->fetch_assoc();
                     $_SESSION["admin"] = $admin;
                     echo "<script>location='admin/index.php';</script>";
-                  }
-                   else {
+                  } else {
               ?>
-
                     <div class="alert alert-danger alert-dismissible alert-atas"><img src="icons/exclamation-circle-fill.svg" alt="" style="margin-bottom: 3px;"> tidak dapat login, username atau password salah
                       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
                     </div>
-
               <?php
                   }
                 }

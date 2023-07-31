@@ -158,6 +158,7 @@ if (!isset($_SESSION["pegawai"])) {
 
               <?php
               if (isset($_POST['submit'])) {
+                $jenisKelamin = $_SESSION['pegawai']['jenis_kelamin'];
                 $nama = $_POST['nama'];
                 $id_jeniscuti = $_POST['id_jeniscuti'];
                 $id_pegawai = $_SESSION['pegawai']['id_pegawai'];
@@ -166,26 +167,30 @@ if (!isset($_SESSION["pegawai"])) {
                 $tgl_berakhir = $_POST['tgl_berakhir'];
                 $alasan_cuti = $_POST['alasan_cuti'];
                 $status_cuti = "Menunggu Persetujuan";
-                  $cek_jumlah = mysqli_query($conn, "SELECT * FROM pegawai WHERE id_pegawai = '$id_pegawai'");
-                  $cek_jumlah_2 = mysqli_fetch_array($cek_jumlah);
-                  $waktu_awal = date_create($tgl_cuti);
-                  $waktu_akhir = date_create($tgl_berakhir);
-                  $diff = date_diff($waktu_awal, $waktu_akhir);
-                  $diff_d = $diff->d;
-                  $jumlah_cuti = $cek_jumlah_2['jumlah_cuti'] - $diff_d;
+                $cek_jumlah = mysqli_query($conn, "SELECT * FROM pegawai WHERE id_pegawai = '$id_pegawai'");
+                $cek_jumlah_2 = mysqli_fetch_array($cek_jumlah);
+                $waktu_awal = date_create($tgl_cuti);
+                $waktu_akhir = date_create($tgl_berakhir);
+                $diff = date_diff($waktu_awal, $waktu_akhir);
+                $diff_d = $diff->d;
+                $jumlah_cuti = $cek_jumlah_2['jumlah_cuti'] - $diff_d;
 
-                if ($cek_jumlah_2['jumlah_cuti'] != 0) {
-                  if ($cek_jumlah_2['jumlah_cuti'] >= $diff_d) {
-                    if($id_jeniscuti == 3){
-                      $update2 = mysqli_query($conn, "UPDATE pegawai SET 
+                if ($id_jeniscuti == 1 && $jenisKelamin == 'Laki-laki') {
+                  echo "<script>alert('cuti melahirkan hanya untuk pegawai perempuan')</script>";
+                  return exit(0);
+                } else {
+                  if ($cek_jumlah_2['jumlah_cuti'] != 0) {
+                    if ($cek_jumlah_2['jumlah_cuti'] >= $diff_d) {
+                      if ($id_jeniscuti == 3) {
+                        $update2 = mysqli_query($conn, "UPDATE pegawai SET 
                         jumlah_cuti = '$jumlah_cuti'
                         WHERE id_pegawai = '$id_pegawai'
                       ");
-                    }if($id_jeniscuti != 3){
+                      }
+                      if ($id_jeniscuti != 3) {
+                      }
 
-                    }
-
-                    $update = mysqli_query($conn, "INSERT INTO pengajuan VALUE(
+                      $update = mysqli_query($conn, "INSERT INTO pengajuan VALUE(
                               null,
                               '" . $id_jeniscuti . "',
                               '" . $id_pegawai . "',
@@ -194,22 +199,23 @@ if (!isset($_SESSION["pegawai"])) {
                               '" . $tgl_berakhir . "',
                               '" . $alasan_cuti . "',
                               '" . $status_cuti . "')");
-                    if ($update OR $update2) {
+                      if ($update or $update2) {
               ?>
               <?php
-                      echo
-                      '<script>
+                        echo
+                        '<script>
                       window.location="cuti.php";
                       alert("cuti berhasil diajukan");
                       </script>';
+                      } else {
+                        echo 'gagal ' . mysqli_error($conn);
+                      }
                     } else {
-                      echo 'gagal ' . mysqli_error($conn);
+                      echo "<script>alert('jumlah cuti yang diambil terlalu banyak')</script>";
                     }
                   } else {
-                    echo "<script>alert('jumlah cuti yang diambil terlalu banyak')</script>";
+                    echo "<script>alert('tidak ada cuti tersedia')</script>";
                   }
-                } else {
-                  echo "<script>alert('tidak ada cuti tersedia')</script>";
                 }
               }
               ?>
