@@ -88,6 +88,12 @@ if (!isset($_SESSION["admin"])) {
               </div>
               Cuti
             </a>
+            <a class="nav-link" href="cetak-laporan-bar.php">
+              <div class="sb-nav-link-icon">
+                <i class="fas fa-chalkboard-teacher"></i>
+              </div>
+              Cetak Laporan
+            </a>
             <a class="nav-link" href="setting.php">
               <div class="sb-nav-link-icon">
                 <i class="fas fa-gear"></i>
@@ -109,21 +115,7 @@ if (!isset($_SESSION["admin"])) {
             <li class="breadcrumb-item active">Laporan Cuti</li>
           </ol>
           <button type="button" class="mb-2 btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Jenis Cuti</button>
-          <form action="cetak-laporan-cuti.php" method="post">
-            <div class="col-md-12 row mb-2">
-              <div class="col-md-3">
-                <input type="date" class="form-control" name="startperiod">
-              </div>
-              to
-              <div class="col-md-3">
-                <input type="date" class="form-control" name="endperiod">
-              </div>
-              <div class="col-md-2">
-                <input type="submit" class="btn btn-warning" name="cetak" value="Cetak Laporan">
-                <!-- <a href="cetak-laporan-cuti.php?" target="_blank" class="btn btn-warning">Cetak Laporan</a> -->
-              </div>
-            </div>
-          </form>
+
           <!-- jenis cuti -->
           <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">

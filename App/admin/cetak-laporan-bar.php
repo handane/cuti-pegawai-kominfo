@@ -69,14 +69,14 @@ if (!isset($_SESSION["admin"])) {
       <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
         <div class="sb-sidenav-menu">
           <div class="nav">
-            <div class="sb-sidenav-menu-heading">Admin</div>
+            <div class="sb-sidenav-menu-heading">Super Admin</div>
             <a class="nav-link" href="index.php">
               <div class="sb-nav-link-icon">
                 <i class="fas fa-home"></i>
               </div>
               Dashboard
             </a>
-            <a class="nav-link aktif" href="pegawai.php">
+            <a class="nav-link" href="pegawai.php">
               <div class="sb-nav-link-icon">
                 <i class="fas fa-address-book"></i>
               </div>
@@ -88,7 +88,7 @@ if (!isset($_SESSION["admin"])) {
               </div>
               Cuti
             </a>
-            <a class="nav-link" href="cetak-laporan-bar.php">
+            <a class="nav-link aktif" href="cetak-laporan-bar.php">
               <div class="sb-nav-link-icon">
                 <i class="fas fa-chalkboard-teacher"></i>
               </div>
@@ -112,58 +112,74 @@ if (!isset($_SESSION["admin"])) {
       <main>
         <div class="container-fluid px-3">
           <ol class="breadcrumb mb-4 mt-2">
-            <li class="breadcrumb-item active">Data Pegawai</li>
+            <li class="breadcrumb-item active">Laporan Cuti</li>
           </ol>
-          <button type="button" class="mb-3 btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Tambah Pegawai</button>
-          <!-- tanggapan -->
+          <form action="cetak-laporan-cuti.php" method="post">
+            <div class="col-md-12 row mb-2">
+              <div class="col-md-3">
+                <input type="date" class="form-control" name="startperiod" required>
+              </div>
+              to
+              <div class="col-md-3">
+                <input type="date" class="form-control" name="endperiod" required>
+              </div>
+              <div class="col-md-2">
+                <input type="submit" class="btn btn-warning" name="cetak" value="Cetak Laporan">
+                <!-- <a href="cetak-laporan-cuti.php?" target="_blank" class="btn btn-warning">Cetak Laporan</a> -->
+              </div>
+            </div>
+          </form>
+          <!-- jenis cuti -->
           <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h6>Registrasi Pegawai</h6>
+                  <h6>Jenis Cuti</h6>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form method="POST">
                   <div class="modal-body">
                     <div class="mb-3">
-                      <input type="text" class="form-control mt-3" id="recipient-name" autocomplete="off" name="nip_baru" placeholder="NIP">
-                      <input type="text" class="form-control mt-3" id="recipient-name" autocomplete="off" name="nama_baru" placeholder="Nama Lengkap">
-                      <input type="text" class="form-control mt-3" id="recipient-name" autocomplete="off" name="telepon_baru" placeholder="No Telepon">
-                      <input type="text" class="form-control mt-3" id="recipient-name" autocomplete="off" name="username_baru" placeholder="Username">
-                      <input type="text" class="form-control mt-3" id="recipient-name" autocomplete="off" name="password_baru" placeholder="Password">
+                      <label for="recipent-name">Tambah Jenis Cuti</label>
+                      <input type="text" class="form-control mb-3" id="recipient-name" autocomplete="off" name="jenisCutiBaru" value="">
+                      <?php
+                      $jenisCuti = mysqli_query($conn, "SELECT * FROM jenis_cuti");
+                      if (mysqli_num_rows($jenisCuti) > 0) {
+                        while ($pq = mysqli_fetch_array($jenisCuti)) {
+                      ?>
+                          <ul>
+                            <li><?= $pq['jenis_cuti'] ?> <a href="cuti-delete.php?id_jeniscuti=<?= $pq['id_jeniscuti'] ?>" onclick="return confirm('konfirmasi hapus')"><img src="../icons/trash-fill-2.svg"> </a></li>
+                          </ul>
+                      <?php }
+                      } ?>
+
                     </div>
                   </div>
                   <div class="modal-footer">
-                    <input type="submit" class="btn btn-primary" name="regist" value="Daftar">
+                    <input type="submit" class="btn btn-primary" name="regist" value="Save">
                   </div>
                 </form>
                 <?php
                 // include_once("db.php");
                 if (isset($_POST["regist"])) {
-                  $nip_baru = $_POST['nip_baru'];
-                  $nama_baru = $_POST['nama_baru'];
-                  $telp_baru = $_POST['telepon_baru'];
-                  $username_baru = $_POST['username_baru'];
-                  $password_baru = $_POST['password_baru'];
-                  $cek_regist = mysqli_query($conn, "SELECT * FROM pegawai WHERE nip = '$nip_baru' OR username = '$username_baru'");
+                  $jenisCutiBaru = $_POST['jenisCutiBaru'];
+                  $cek_regist = mysqli_query($conn, "SELECT * FROM jenis_cuti WHERE jenis_cuti = '$jenisCutiBaru'");
                   if (mysqli_num_rows($cek_regist) == 0) {
-                    $get_regist = mysqli_query($conn, "INSERT INTO pegawai VALUE(
+                    $get_regist = mysqli_query($conn, "INSERT INTO jenis_cuti VALUE(
                                 null,
-                                '" . $nip_baru . "',
-                                '" . $nama_baru . "',
-                                '" . $username_baru . "',
-                                '" . $password_baru . "',
-                                '" . $telp_baru . "',
-                                '12',
-                                ''
+                                '" . $jenisCutiBaru . "'
                             )");
                     if ($get_regist) {
-                      echo '<script>alert("akun berhasil dibuat")</script>';
+                      echo '
+                      <script>
+                        alert("berhasil disimpan");
+                        window.location="cuti.php";
+                      </script>';
                     } else {
-                      echo '<script>alert("akun gagal dibuat")</script>';
+                      echo '<script>alert("Gagal")</script>';
                     }
                   } else {
-                    echo '<script>alert("Gagal, NIP atau Username sudah terdaftar")</script>';
+                    echo '<script>alert("Gagal, jenis cuit sudah ada")</script>';
                   }
                 }
                 ?>
@@ -174,41 +190,38 @@ if (!isset($_SESSION["admin"])) {
             <div class="card-body">
               <table id="datatablesSimple">
                 <thead>
-                  <tr style="font-size: 16px;">
+                  <tr style="font-size: 14px;">
                     <th>No</th>
-                    <th>Foto</th>
-                    <th>NIP</th>
                     <th>Nama</th>
-                    <th>Username</th>
-                    <th>No Telpon</th>
-                    <th>Jumlah Cuti</th>
-                    <th></th>
+                    <th>Jenis Cuti</th>
+                    <th>Alasan</th>
+                    <th>Tgl diajukan</th>
+                    <th>Mulai</th>
+                    <th>Berakhir</th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php
                   $no = 1;
-                  $get_pegawai = mysqli_query($conn, "SELECT * FROM pegawai");
+                  $get_pegawai = mysqli_query($conn, "SELECT * FROM pengajuan LEFT JOIN pegawai USING (id_pegawai) LEFT JOIN jenis_cuti USING (id_jeniscuti) ORDER BY id_pengajuan DESC");
                   while ($p = mysqli_fetch_array($get_pegawai)) {
                   ?>
-                    <tr style="font-size: 16px;" id="klik-tabel">
+                    <tr style="font-size: 14px;" id="klik-tabel">
                       <td><?php echo $no++; ?></td>
-                      <td><img src="../pegawai/foto/<?= $p['foto'] ?>" alt="" width="70px;" height="70px;"></td>
-                      <td><?php echo $p['nip']; ?></td>
                       <td><?php echo $p['nama']; ?></td>
-                      <td><?php echo $p['username']; ?></td>
-                      <td><?php echo $p['telp']; ?></td>
-                      <td><?php echo $p['jumlah_cuti']; ?></td>
-                      <td>
-                        <a class="btn btn-sm btn-success" href="pegawai-edit.php?id_pegawai=<?php echo $p['id_pegawai'] ?>">Edit</a>
-                        <a class="btn btn-sm btn-danger" onclick="return confirm('apakah anda yakin ingin menghapus akun <?php echo $p['nama'] ?>, semua data akan hilang!')" href="pegawai-delete.php?id_pegawai=<?php echo $p['id_pegawai'] ?>">Delete</a>
-                      </td>
+                      <td><?php echo $p['jenis_cuti']; ?></td>
+                      <td><?php echo $p['alasan_cuti']; ?></td>
+                      <td><?php echo $p['tgl_pengajuan']; ?></td>
+                      <td><?php echo $p['tgl_cuti']; ?></td>
+                      <td><?php echo $p['tgl_berakhir']; ?></td>
+
                     </tr>
                   <?php } ?>
                 </tbody>
               </table>
             </div>
           </div>
+        </div>
       </main>
       <footer class="mt-5">
       </footer>

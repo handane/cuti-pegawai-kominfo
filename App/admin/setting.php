@@ -92,6 +92,12 @@ if (!isset($_SESSION["admin"])) {
               </div>
               Cuti
             </a>
+            <a class="nav-link" href="cetak-laporan-bar.php">
+              <div class="sb-nav-link-icon">
+                <i class="fas fa-chalkboard-teacher"></i>
+              </div>
+              Cetak Laporan
+            </a>
             <a class="nav-link aktif" href="setting.php">
               <div class="sb-nav-link-icon">
                 <i class="fas fa-gear"></i>

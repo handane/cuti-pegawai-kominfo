@@ -8,6 +8,7 @@ if (!isset($_SESSION["admin"])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
    <meta charset="utf-8" />
    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -64,7 +65,7 @@ if (!isset($_SESSION["admin"])) {
 
 <body class="sb-nav-fixed">
    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-   <a class="navbar-brand ps-3" href="index.php"> CUTI | ADMIN</a>
+      <a class="navbar-brand ps-3" href="index.php"> CUTI | ADMIN</a>
       <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!">
          <i class="fas fa-bars"></i>
       </button>
@@ -81,7 +82,7 @@ if (!isset($_SESSION["admin"])) {
                <li>
                   <hr class="dropdown-divider" />
                </li>
-               <li><a href="logout.php" class="dropdown-item">logout</a></li> 
+               <li><a href="logout.php" class="dropdown-item">logout</a></li>
             </ul>
          </li>
       </ul>
@@ -109,6 +110,12 @@ if (!isset($_SESSION["admin"])) {
                         <i class="fas fa-chalkboard-teacher"></i>
                      </div>
                      Cuti
+                  </a>
+                  <a class="nav-link" href="cetak-laporan-bar.php">
+                     <div class="sb-nav-link-icon">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                     </div>
+                     Cetak Laporan
                   </a>
                   <a class="nav-link" href="setting.php">
                      <div class="sb-nav-link-icon">
@@ -215,7 +222,7 @@ if (!isset($_SESSION["admin"])) {
                         </div>
                      </div>
                   </section>
-               </div>   
+               </div>
          </main>
          <footer class="mt-5">
          </footer>
